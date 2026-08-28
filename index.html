@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kolik ušetříte na hypotéce? Spočítejte si to zdarma | Jan Frýdl</title>
+    <meta
+      name="description"
+      content="Spočítejte si zdarma orientační splátku hypotéky a zjistěte, kolik můžete ušetřit srovnáním bank. Osobní srovnání nabídek do 24 hodin od finančního poradce Jana Frýdla."
+    />
+    <link rel="canonical" href="https://www.janfrydl.cz/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:title" content="Kolik ušetříte na hypotéce? Spočítejte si to zdarma" />
+    <meta
+      property="og:description"
+      content="Spočítejte si zdarma orientační splátku hypotéky a zjistěte, kolik můžete ušetřit srovnáním bank. Osobní srovnání do 24 hodin."
+    />
+    <meta property="og:image" content="https://www.janfrydl.cz/img/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://www.janfrydl.cz/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonty: preload self-hostovaného Montserrat Variable (stejné soubory jako janfrydl.cz) -->
+    <link rel="preload" href="/fonts/montserrat-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/img/jan-portret.webp" as="image" fetchpriority="high" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Kritické styly nad ohybem — vyplní se hned, bez čekání na plný stylesheet -->
+    <style>
+      body {
+        background: #fff;
+        color: #000;
+        font-family:
+          'Montserrat Variable',
+          ui-sans-serif,
+          system-ui,
+          sans-serif;
+        margin: 0;
+      }
+      #hero {
+        min-height: 100svh;
+      }
+    </style>
+
+    <script type="module" src="/src/main.ts"></script>
+
+    <!-- JSON-LD: FinancialService + Person -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "FinancialService",
+            "name": "Jan Frýdl, hypoteční a majetkové poradenství",
+            "url": "https://www.janfrydl.cz/",
+            "telephone": "+420731444770",
+            "email": "jan.frydl@4fin.cz",
+            "areaServed": "CZ",
+            "priceRange": "Zdarma pro klienta"
+          },
+          {
+            "@type": "Person",
+            "name": "Jan Frýdl",
+            "jobTitle": "Správce majetku",
+            "url": "https://www.janfrydl.cz/",
+            "email": "jan.frydl@4fin.cz",
+            "telephone": "+420731444770",
+            "sameAs": ["https://www.instagram.com/jan_frydl"]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#hlavni-obsah" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-brand-primary focus:text-white focus:px-4 focus:py-2">
+      Přeskočit na hlavní obsah
+    </a>
+
+    <!-- ======================= HLAVIČKA ======================= -->
+    <header class="sticky top-0 z-30 bg-brand-light shadow-card">
+      <div class="mx-auto flex max-w-screen-xl items-center justify-between px-4 py-3 md:px-6">
+        <a href="#hero" class="text-xl font-semibold uppercase tracking-wide">
+          <span class="text-brand-dark">Jan</span>
+          <span class="bg-brand-primary text-white px-1">Frýdl</span>
+        </a>
+        <a
+          href="tel:+420731444770"
+          class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-brand-primary"
+          aria-label="Zavolat Janu Frýdlovi na číslo +420 731 444 770"
+        >
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"
+            />
+          </svg>
+          <span class="hidden sm:inline">731 444 770</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="hlavni-obsah">
+      <!-- ======================= HERO + KALKULAČKA ======================= -->
+      <section id="hero" class="bg-brand-light">
+        <div class="mx-auto grid max-w-screen-xl gap-8 px-4 py-8 md:px-6 lg:grid-cols-2 lg:items-start lg:py-16">
+          <div class="min-w-0">
+            <p class="mb-3 inline-block bg-brand-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+              Nezávislé hypoteční poradenství
+            </p>
+            <h1 class="text-3xl font-extrabold leading-tight md:text-4xl lg:text-5xl">
+              Spočítejte si zdarma srovnání a zjistěte, kolik můžete ušetřit.
+            </h1>
+            <p class="mt-4 max-w-lg text-lg text-ui-muted">
+              Porovnám vám nabídky všech bank a najdu tu nejlevnější variantu pro vaši situaci. Vy jen posunete pár posuvníků.
+            </p>
+            <ul class="mt-6 flex flex-col gap-2 text-sm font-medium sm:flex-row sm:flex-wrap sm:gap-6">
+              <li class="flex items-center gap-2">
+                <span class="text-ui-success" aria-hidden="true">✓</span> Zdarma pro klienta
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-ui-success" aria-hidden="true">✓</span> Nezávazně
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-ui-success" aria-hidden="true">✓</span> Odpověď do 24 hodin
+              </li>
+            </ul>
+
+            <!-- Google recenze — vodorovně listovatelné karty, reálný obsah doplní klient -->
+            <div class="mt-6">
+              <div class="flex items-center gap-2">
+                <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                  <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
+                  <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" />
+                  <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z" />
+                  <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
+                </svg>
+                <span class="text-sm font-bold">Recenze na Googlu</span>
+                <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                <span class="sr-only">Hodnocení 5 z 5 hvězd na Google</span>
+              </div>
+
+              <div class="relative mt-3">
+                <button
+                  type="button"
+                  aria-label="Předchozí recenze"
+                  data-carousel-prev="recenze-carousel-hero"
+                  class="absolute left-1 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-brand-primary/90 text-lg font-bold text-white shadow-card hover:bg-brand-primary"
+                >
+                  <span aria-hidden="true">‹</span>
+                </button>
+                <div id="recenze-carousel-hero" class="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 pb-2 sm:mx-0 sm:px-0">
+                <article class="w-64 shrink-0 snap-start rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 sm:w-72">
+                  <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                  <p class="mt-2 text-sm text-ui-muted">„Mám v pana Frýdla absolutní důvěru, takže s tím přichází i vnitřní klid ohledně finanční stránky naší rodiny.“</p>
+                  <p class="mt-3 flex items-center justify-between">
+                    <span class="text-sm font-bold">Mar Két</span>
+                    <a href="#recenze" class="text-xs font-bold uppercase text-brand-primary underline">Číst celé →</a>
+                  </p>
+                </article>
+                <article class="w-64 shrink-0 snap-start rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 sm:w-72">
+                  <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                  <p class="mt-2 text-sm text-ui-muted">„Mě osobně ušetřil bez přehánění stovky tisíc korun.“</p>
+                  <p class="mt-3 flex items-center justify-between">
+                    <span class="text-sm font-bold">Elisabeth A.</span>
+                    <a href="#recenze" class="text-xs font-bold uppercase text-brand-primary underline">Číst celé →</a>
+                  </p>
+                </article>
+                <article class="w-64 shrink-0 snap-start rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 sm:w-72">
+                  <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                  <p class="mt-2 text-sm text-ui-muted">„Pokud to člověka nic nestojí (pouze trocha času), tak zde není co ztratit.“</p>
+                  <p class="mt-3 flex items-center justify-between">
+                    <span class="text-sm font-bold">Victor A.</span>
+                    <a href="#recenze" class="text-xs font-bold uppercase text-brand-primary underline">Číst celé →</a>
+                  </p>
+                </article>
+                <article class="w-64 shrink-0 snap-start rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 sm:w-72">
+                  <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                  <p class="mt-2 text-sm text-ui-muted">„Our meetings have been a highly worthwhile investment of my time.“</p>
+                  <p class="mt-3 flex items-center justify-between">
+                    <span class="text-sm font-bold">Debashis Roy</span>
+                    <a href="#recenze" class="text-xs font-bold uppercase text-brand-primary underline">Číst celé →</a>
+                  </p>
+                </article>
+                <article class="w-64 shrink-0 snap-start rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 sm:w-72">
+                  <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                  <p class="mt-2 text-sm text-ui-muted">„Jan knew the options and could even find additional insurance options that would not have been available to me.“</p>
+                  <p class="mt-3 flex items-center justify-between">
+                    <span class="text-sm font-bold">Richard Potter</span>
+                    <a href="#recenze" class="text-xs font-bold uppercase text-brand-primary underline">Číst celé →</a>
+                  </p>
+                </article>
+                </div>
+                <button
+                  type="button"
+                  aria-label="Další recenze"
+                  data-carousel-next="recenze-carousel-hero"
+                  class="absolute right-1 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-brand-primary/90 text-lg font-bold text-white shadow-card hover:bg-brand-primary"
+                >
+                  <span aria-hidden="true">›</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==== KROK 1: kalkulačka, živý přepočet, bez tlačítka „Spočítat" ==== -->
+          <div class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 md:p-6">
+            <div id="fixace-group" role="group" aria-label="Přepínač režimu kalkulačky" class="mb-5 flex gap-1 rounded-full bg-brand-primary-tint p-1 text-sm font-bold uppercase">
+              <button type="button" id="tab-koupe" role="tab" aria-selected="true" aria-controls="panel-koupe" class="flex-1 rounded-full px-3 py-2 transition aria-selected:bg-brand-primary aria-selected:text-white">
+                Kupuji nemovitost
+              </button>
+              <button type="button" id="tab-refi" role="tab" aria-selected="false" aria-controls="panel-refi" class="flex-1 rounded-full px-3 py-2 transition aria-selected:bg-brand-primary aria-selected:text-white">
+                Končí mi fixace
+              </button>
+            </div>
+
+            <!-- Panel: Kupuji nemovitost -->
+            <div id="panel-koupe" role="tabpanel" aria-labelledby="tab-koupe" class="flex flex-col gap-5">
+              <div>
+                <div class="mb-1 flex items-center justify-between text-sm font-bold">
+                  <label for="cena-slider">Cena nemovitosti</label>
+                  <span class="flex items-baseline gap-1">
+                    <input
+                      type="number"
+                      id="cena-input"
+                      class="w-28 rounded-sm border border-black/10 px-2 py-1 text-right tabular-nums"
+                      min="1000000"
+                      max="20000000"
+                      step="100000"
+                      aria-label="Cena nemovitosti v korunách"
+                    />
+                    Kč
+                  </span>
+                </div>
+                <input type="range" id="cena-slider" min="1000000" max="20000000" step="100000" value="5500000" aria-label="Cena nemovitosti" />
+              </div>
+
+              <div>
+                <div class="mb-1 flex items-center justify-between text-sm font-bold">
+                  <label for="zdroje-slider">Vlastní zdroje</label>
+                  <span class="flex items-baseline gap-1">
+                    <input
+                      type="number"
+                      id="zdroje-input"
+                      class="w-28 rounded-sm border border-black/10 px-2 py-1 text-right tabular-nums"
+                      min="0"
+                      step="50000"
+                      aria-label="Vlastní zdroje v korunách"
+                    />
+                    Kč
+                    <span id="zdroje-procenta" class="ml-1 font-normal text-ui-muted"></span>
+                  </span>
+                </div>
+                <input type="range" id="zdroje-slider" min="0" max="4950000" step="50000" value="1100000" aria-label="Vlastní zdroje" />
+              </div>
+
+              <div>
+                <div class="mb-1 flex items-center justify-between text-sm font-bold">
+                  <label for="roky-slider">Doba splácení</label>
+                  <span id="roky-hodnota">25 let</span>
+                </div>
+                <input type="range" id="roky-slider" min="5" max="30" step="1" value="25" aria-label="Doba splácení v letech" />
+              </div>
+
+              <div>
+                <p class="mb-1 text-sm font-bold">Fixace</p>
+                <div class="flex gap-2">
+                  <button type="button" data-fixace="1" aria-pressed="false" class="flex-1 rounded-none border-2 border-brand-primary py-2 text-sm font-bold aria-pressed:bg-brand-primary aria-pressed:text-white">1 rok</button>
+                  <button type="button" data-fixace="3" aria-pressed="true" class="flex-1 rounded-none border-2 border-brand-primary py-2 text-sm font-bold aria-pressed:bg-brand-primary aria-pressed:text-white">3 roky</button>
+                  <button type="button" data-fixace="5" aria-pressed="false" class="flex-1 rounded-none border-2 border-brand-primary py-2 text-sm font-bold aria-pressed:bg-brand-primary aria-pressed:text-white">5 let</button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <label for="do36-toggle" class="text-sm font-bold">Je vám méně než 36 let?</label>
+                <input type="checkbox" id="do36-toggle" class="h-6 w-11 cursor-pointer accent-brand-primary" />
+              </div>
+
+              <div>
+                <label for="ucel-select" class="mb-1 block text-sm font-bold">Účel úvěru</label>
+                <select id="ucel-select" class="w-full rounded-sm border border-black/10 px-3 py-2">
+                  <option value="vlastni_bydleni">Vlastní bydlení</option>
+                  <option value="investice">Investice (pronájem)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Panel: Refinancování -->
+            <div id="panel-refi" role="tabpanel" aria-labelledby="tab-refi" hidden class="flex flex-col gap-5">
+              <div>
+                <div class="mb-1 flex items-center justify-between text-sm font-bold">
+                  <label for="refi-zbyva-slider">Zbývá doplatit</label>
+                  <span class="flex items-baseline gap-1">
+                    <input type="number" id="refi-zbyva-input" class="w-28 rounded-sm border border-black/10 px-2 py-1 text-right tabular-nums" min="500000" max="15000000" step="50000" aria-label="Zbývá doplatit v korunách" />
+                    Kč
+                  </span>
+                </div>
+                <input type="range" id="refi-zbyva-slider" min="500000" max="15000000" step="50000" value="3200000" aria-label="Zbývá doplatit" />
+              </div>
+
+              <div>
+                <div class="mb-1 flex items-center justify-between text-sm font-bold">
+                  <label for="refi-sazba-slider">Současná sazba</label>
+                  <span class="flex items-baseline gap-1">
+                    <input type="number" id="refi-sazba-input" class="w-24 rounded-sm border border-black/10 px-2 py-1 text-right tabular-nums" min="1.5" max="8" step="0.01" aria-label="Současná úroková sazba v procentech" />
+                    %
+                  </span>
+                </div>
+                <input type="range" id="refi-sazba-slider" min="1.5" max="8" step="0.01" value="2.29" aria-label="Současná úroková sazba" />
+              </div>
+
+              <div>
+                <div class="mb-1 flex items-center justify-between text-sm font-bold">
+                  <label for="refi-doba-slider">Zbývající doba splácení</label>
+                  <span id="refi-doba-hodnota">22 let</span>
+                </div>
+                <input type="range" id="refi-doba-slider" min="5" max="30" step="1" value="22" aria-label="Zbývající doba splácení v letech" />
+              </div>
+
+              <div>
+                <label for="refi-fixace-konci-select" class="mb-1 block text-sm font-bold">Kdy končí fixace?</label>
+                <select id="refi-fixace-konci-select" class="w-full rounded-sm border border-black/10 px-3 py-2">
+                  <option value="do-3">Do 3 měsíců</option>
+                  <option value="3-6" selected>3–6 měsíců</option>
+                  <option value="6-12">6–12 měsíců</option>
+                  <option value="rok-plus">Za víc než rok</option>
+                  <option value="nevim">Nevím</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Výsledek — dominanta stránky -->
+            <div class="mt-6 rounded-sm bg-brand-primary-tint p-4 md:p-5">
+              <p class="text-sm font-bold uppercase tracking-wide text-ui-muted">Odhadovaná splátka</p>
+              <p class="mt-1 flex flex-wrap items-baseline gap-2">
+                <span id="vysledek-splatka" class="text-hero-num font-black leading-none">0</span>
+                <span class="rounded-none border-2 border-accent-value px-2 py-0.5 text-base font-bold text-brand-dark">Kč / měsíc</span>
+              </p>
+
+              <div id="radek-ltv" class="mt-3 text-sm">
+                LTV <strong id="ltv-hodnota">0 %</strong> ·
+                <span id="ltv-stav" data-stav="ok" class="font-bold data-[stav=ok]:text-ui-success data-[stav=warning]:text-ui-warning-text"></span>
+              </div>
+
+              <div id="radek-refi" hidden class="mt-3 text-sm">
+                <p id="refi-splatka-soucasna"></p>
+                <p id="refi-rozdil" class="font-bold"></p>
+              </div>
+
+              <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
+                <div>
+                  <dt class="text-ui-muted">Výše úvěru</dt>
+                  <dd id="vysledek-uver" class="font-bold tabular-nums">0 Kč</dd>
+                </div>
+                <div>
+                  <dt class="text-ui-muted">Celkem zaplatíte</dt>
+                  <dd id="vysledek-celkem" class="font-bold tabular-nums">0 Kč</dd>
+                </div>
+                <div class="col-span-2">
+                  <dt class="text-ui-muted">Z toho úroky</dt>
+                  <dd id="vysledek-uroky" class="font-bold tabular-nums">0 Kč</dd>
+                </div>
+              </dl>
+
+              <p id="vysledek-sazba-info" class="mt-3 text-xs text-ui-muted"></p>
+            </div>
+
+            <!-- LTV upozornění — neblokující, navázané na CTA -->
+            <div id="ltv-upozorneni" hidden class="mt-4 rounded-sm bg-ui-warning-tint p-4">
+              <p id="ltv-upozorneni-text" class="text-sm text-ui-warning-text"></p>
+              <a href="#gate-form" class="mt-2 inline-block text-sm font-bold uppercase text-brand-primary underline">Ozvěte se mi →</a>
+            </div>
+
+            <p class="mt-4 text-xs text-ui-muted">
+              Výpočet je orientační a nejde o nabídku ani příslib úvěru. Skutečnou sazbu a podmínky stanoví banka podle bonity, LTV, typu
+              nemovitosti a doplňkových produktů. Sazby v přehledu jsou minimální nabídkové sazby z veřejných sazebníků k 24. 8. 2026
+              (zdroj: Hypoindex.cz).
+            </p>
+          </div>
+        </div>
+
+        <!-- ==== KROK 2: gate na formulář ==== -->
+        <div class="mx-auto max-w-screen-xl px-4 pb-12 md:px-6 lg:pb-20">
+          <div class="mx-auto max-w-3xl">
+            <p class="mb-2 text-center text-xs font-bold uppercase tracking-wider text-brand-primary">Krok 2 z 2 · poslední krok</p>
+            <h2 class="text-center text-2xl font-extrabold uppercase md:text-3xl">Tohle o své hypotéce ještě nevíte</h2>
+            <p class="mx-auto mt-2 max-w-lg text-center text-ui-muted">
+              Splátku jste spočítali za pár vteřin. To, kolik na ní reálně proděláte výběrem špatné banky, se nedá spočítat bez srovnání.
+            </p>
+
+            <div class="relative mt-6">
+              <div id="gate-obal" class="gate-rozmazano rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
+                <ul class="mb-4 flex flex-col gap-2 text-sm font-medium">
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Osobní srovnání všech bank pro váš konkrétní úvěr, ne obecná čísla z internetu</li>
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Přesně která banka vám dá nejnižší sazbu</li>
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Kolik můžete orientačně ušetřit měsíčně i za celou fixaci</li>
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Doporučenou délku fixace podle vaší situace</li>
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Do 24 hodin v mailu, bez schůzky a bez závazku</li>
+                </ul>
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="border-b border-black/10 text-left text-ui-muted">
+                      <th class="pb-2 font-normal">Banka</th>
+                      <th class="pb-2 text-right font-normal">Sazba (3letá fixace)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="gate-tabulka-telo">
+                    <tr>
+                      <td class="py-2 pr-4 font-medium">Fio banka</td>
+                      <td class="py-2 text-right tabular-nums">4,58 %</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 pr-4 font-medium">Moneta Money Bank</td>
+                      <td class="py-2 text-right tabular-nums">4,99 %</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 pr-4 font-medium">Air Bank</td>
+                      <td class="py-2 text-right tabular-nums">4,99 %</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 pr-4 font-medium">Raiffeisenbank</td>
+                      <td class="py-2 text-right tabular-nums">5,04 %</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p id="gate-uspora" class="mt-4 text-sm"></p>
+                <p id="gate-fixace-doporuceni" class="mt-2 text-sm"></p>
+              </div>
+
+              <div id="gate-zamek-overlay" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/70 text-center">
+                <span aria-hidden="true" class="text-3xl">🔒</span>
+                <p class="max-w-xs text-sm font-bold">Odemkne se odesláním formuláře níže</p>
+              </div>
+            </div>
+
+            <div class="mt-8 rounded-sm bg-brand-primary-dark p-5 text-white md:p-6">
+              <p id="gate-hook-text" class="text-lg font-bold">
+                U hypoték podobných té vaší je dnes rozdíl mezi nejlevnější a nejdražší bankou klidně stovky tisíc korun za dobu fixace.
+              </p>
+              <p class="mt-2 text-white/80">
+                Nevím, jestli právě nemáte tu dražší variantu. Zjistím to za vás a řeknu vám na rovinu, kde ušetříte nejvíc. Do 24 hodin,
+                zdarma a nezávazně.
+              </p>
+            </div>
+
+            <div id="gate-form-obal" class="mt-6">
+              <form id="gate-form" novalidate class="rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
+                <div class="grid gap-4">
+                  <div>
+                    <label for="gate-jmeno" class="mb-1 block text-sm font-bold">Jméno a příjmení</label>
+                    <input
+                      type="text"
+                      id="gate-jmeno"
+                      name="jmeno"
+                      data-pole="jmeno"
+                      autocomplete="name"
+                      required
+                      class="w-full rounded-sm border border-black/10 px-3 py-2"
+                      aria-describedby="gate-err-jmeno"
+                    />
+                    <p id="gate-err-jmeno" data-chyba="jmeno" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                  </div>
+                  <div>
+                    <label for="gate-telefon" class="mb-1 block text-sm font-bold">Telefon</label>
+                    <input
+                      type="tel"
+                      id="gate-telefon"
+                      name="telefon"
+                      data-pole="telefon"
+                      autocomplete="tel"
+                      required
+                      class="w-full rounded-sm border border-black/10 px-3 py-2"
+                      aria-describedby="gate-err-telefon"
+                    />
+                    <p id="gate-err-telefon" data-chyba="telefon" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                  </div>
+                  <div>
+                    <label for="gate-email" class="mb-1 block text-sm font-bold">E-mail</label>
+                    <input
+                      type="email"
+                      id="gate-email"
+                      name="email"
+                      data-pole="email"
+                      autocomplete="email"
+                      required
+                      class="w-full rounded-sm border border-black/10 px-3 py-2"
+                      aria-describedby="gate-err-email"
+                    />
+                    <p id="gate-err-email" data-chyba="email" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                    <button type="button" data-role="oprava-emailu" hidden class="mt-1 text-sm font-bold text-brand-primary underline"></button>
+                  </div>
+                  <div>
+                    <label for="gate-situace" class="mb-1 block text-sm font-bold">Co řešíte?</label>
+                    <select id="gate-situace" name="situace" data-pole="situace" required class="w-full rounded-sm border border-black/10 px-3 py-2" aria-describedby="gate-err-situace">
+                      <option value="">Vyberte…</option>
+                      <option value="Kupuji nemovitost">Kupuji nemovitost</option>
+                      <option value="Končí mi fixace">Končí mi fixace</option>
+                      <option value="Chci vědět, kolik dostanu">Chci vědět, kolik dostanu</option>
+                      <option value="Něco jiného">Něco jiného</option>
+                    </select>
+                    <p id="gate-err-situace" data-chyba="situace" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                  </div>
+
+                  <div class="pole-pro-boty" aria-hidden="true">
+                    <label for="gate-web">Vaše webová stránka</label>
+                    <input type="text" id="gate-web" name="web" data-pole="honeypot" tabindex="-1" autocomplete="off" />
+                  </div>
+
+                  <div>
+                    <label class="flex items-start gap-2 text-sm">
+                      <input type="checkbox" id="gate-souhlas" name="souhlas" data-pole="souhlas" required class="mt-1 accent-brand-primary" aria-describedby="gate-err-souhlas" />
+                      <span>Souhlasím se <a href="/gdpr" class="underline">zpracováním osobních údajů</a> za účelem přípravy nabídky.</span>
+                    </label>
+                    <p id="gate-err-souhlas" data-chyba="souhlas" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                  </div>
+
+                  <p data-role="chyba-obecna" hidden role="alert" class="rounded-sm bg-ui-warning-tint p-3 text-sm text-ui-warning-text"></p>
+
+                  <button
+                    type="submit"
+                    data-role="btn-odeslat"
+                    class="w-full rounded-none bg-brand-primary py-3 text-base font-bold uppercase tracking-wide text-white transition hover:opacity-90 focus-visible:opacity-90"
+                  >
+                    Ukázat mi nejlevnější banku
+                  </button>
+                  <p class="text-center text-xs text-ui-muted">10 vteřin vyplnění · bez schůzky · k ničemu se nezavazujete</p>
+                </div>
+              </form>
+
+              <div id="gate-diky" hidden class="rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
+                <h3 class="text-xl font-extrabold uppercase text-ui-success">Děkujeme, máme to!</h3>
+                <p id="gate-diky-shrnuti" class="mt-2 text-sm font-medium"></p>
+                <p class="mt-3">
+                  Ozvu se vám do 24 hodin (Po–Pá do 1 hodiny). Projdeme 10 minut vaši situaci a do dalšího dne máte v mailu srovnání bank.
+                </p>
+                <a
+                  href="tel:+420731444770"
+                  class="mt-4 inline-flex items-center gap-2 rounded-none bg-brand-primary-dark px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90"
+                >
+                  📞 Zavolat rovnou
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= AKTUÁLNÍ SITUACE NA TRHU ======================= -->
+      <section class="bg-brand-primary-dark py-14 text-white md:py-20">
+        <div class="mx-auto max-w-screen-xl px-4 md:px-6">
+          <h2 class="text-2xl font-extrabold uppercase md:text-3xl">Sazby rostou pátý měsíc v řadě</h2>
+          <p class="mt-3 max-w-2xl text-white/80">
+            Průměrná nabídková sazba hypoték dosáhla v srpnu 2026 nejvyšší úrovně za dva roky. Rozdíl mezi bankami je teď větší než kdy
+            jindy, a proto se srovnání vyplatí právě teď.
+          </p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="rounded-sm bg-white/10 p-4">
+              <p class="text-3xl font-black text-accent-value">5,42 %</p>
+              <p class="mt-1 text-sm text-white/80">Průměrná nabídková sazba v srpnu 2026, nejvýš za dva roky.</p>
+              <p class="mt-2 text-xs text-white/50">Zdroj: Swiss Life Hypoindex, srpen 2026</p>
+            </div>
+            <div class="rounded-sm bg-white/10 p-4">
+              <p class="text-3xl font-black text-accent-value">+0,53 p. b.</p>
+              <p class="mt-1 text-sm text-white/80">Nárůst za posledních pět měsíců. V březnu 2026 to bylo 4,89 %.</p>
+              <p class="mt-2 text-xs text-white/50">Zdroj: Swiss Life Hypoindex</p>
+            </div>
+            <div class="rounded-sm bg-white/10 p-4">
+              <p class="text-3xl font-black text-accent-value">+1 100 Kč</p>
+              <p class="mt-1 text-sm text-white/80">
+                Modelová hypotéka 3,5 mil. Kč / 25 let vychází v srpnu na 21 327 Kč měsíčně, proti březnu zhruba o tolik víc.
+              </p>
+              <p class="mt-2 text-xs text-white/50">Zdroj: Swiss Life Hypoindex, vlastní výpočet</p>
+            </div>
+            <div class="rounded-sm bg-white/10 p-4">
+              <p class="text-3xl font-black text-accent-value">1 p. b.+</p>
+              <p class="mt-1 text-sm text-white/80">
+                Rozdíl mezi nejlevnější a nejdražší bankou znamená u hypotéky 4 mil. Kč řádově statisíce za dobu splácení.
+              </p>
+              <p class="mt-2 text-xs text-white/50">Zdroj: Hypoindex.cz, 24. 8. 2026</p>
+            </div>
+          </div>
+
+          <p class="mt-6 max-w-2xl text-sm text-white/70">
+            Statisíce domácností teď navíc přechází z 2% fixací uzavřených v letech 2020 až 2021 na dnešní sazby. O to víc se vyplatí
+            nechat si nabídky porovnat, ne podepsat první, kterou banka nabídne.
+          </p>
+        </div>
+      </section>
+
+      <!-- ======================= CO PRO VÁS UDĚLÁM ======================= -->
+      <section class="py-14 md:py-20">
+        <div class="mx-auto max-w-screen-xl px-4 md:px-6">
+          <h2 class="text-2xl font-extrabold uppercase md:text-3xl">Co pro vás udělám</h2>
+          <div class="mt-8 grid gap-6 md:grid-cols-3">
+            <div>
+              <p class="text-4xl font-black text-brand-primary">1</p>
+              <h3 class="mt-2 text-lg font-bold uppercase">Spočítáte si splátku a napíšete mi</h3>
+              <p class="mt-2 text-ui-muted">Posunete pár posuvníků, hned vidíte orientační splátku a necháte mi na sebe kontakt.</p>
+            </div>
+            <div>
+              <p class="text-4xl font-black text-brand-primary">2</p>
+              <h3 class="mt-2 text-lg font-bold uppercase">Porovnám vám všechny banky</h3>
+              <p class="mt-2 text-ui-muted">Do 24 hodin (v pracovní dny obvykle do hodiny) vám zavolám a projdeme vaši situaci.</p>
+            </div>
+            <div>
+              <p class="text-4xl font-black text-brand-primary">3</p>
+              <h3 class="mt-2 text-lg font-bold uppercase">Vyřídíme to bez běhání po pobočkách</h3>
+              <p class="mt-2 text-ui-muted">Zastupuju vás v jednání s bankami a vyjednávám sazbu, vy jen podepisujete.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= KDO JSEM ======================= -->
+      <section class="overflow-hidden">
+        <div class="grid md:grid-cols-2 md:items-stretch">
+          <!-- fotka na tmavém panelu s dekorativními efekty za Honzou -->
+          <div class="relative isolate flex items-center justify-center overflow-hidden bg-brand-primary-dark px-6 py-14 md:py-20">
+            <div class="pointer-events-none absolute -left-12 top-6 h-56 w-56 rounded-full bg-accent-value/25 blur-3xl" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute -right-10 bottom-0 h-48 w-48 rounded-full bg-brand-primary/50 blur-3xl" aria-hidden="true"></div>
+            <div class="relative w-full max-w-sm">
+              <div class="absolute -bottom-4 -right-4 h-full w-full border-4 border-accent-value md:-bottom-6 md:-right-6" aria-hidden="true"></div>
+              <img
+                src="/img/jan-portret.webp"
+                alt="Jan Frýdl, správce majetku a finanční poradce"
+                width="532"
+                height="800"
+                loading="lazy"
+                class="relative w-full shadow-card"
+              />
+            </div>
+          </div>
+          <!-- text na světlém panelu — barevně odlišeno od fotky -->
+          <div class="flex flex-col justify-center bg-brand-primary-tint px-4 py-14 md:px-10 md:py-20 lg:px-16">
+            <div class="max-w-lg">
+              <p class="mb-2 inline-block bg-brand-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">Kdo jsem</p>
+              <h2 class="text-2xl font-extrabold uppercase md:text-3xl">Jan Frýdl</h2>
+              <p class="mt-1 text-sm font-bold uppercase text-ui-muted">Správce majetku</p>
+              <div class="mt-4 flex flex-col gap-3 text-ui-muted">
+                <p>Jsem vaším spolehlivým partnerem a průvodcem na cestě k finančnímu zdraví. Pomůžu vám s finančním plánem šitým na míru.</p>
+                <p>Zastupuju vás v jednání s bankami a dalšími institucemi. Šetřím váš čas i peníze, a to nejen na úrocích a poplatcích.</p>
+                <p>Stabilní součástí mých služeb je financování bydlení a pojištění majetku. Mám radost, když mě klienti doporučí dál.</p>
+                <p>Moje práce nekončí sjednáním hypotéky. S každým klientem plánuju servisní schůzky každý rok až dva.</p>
+                <p>Spolupracuju s právníky, účetními, daňovými poradci i notáři, aby na nic nedošlo.</p>
+              </div>
+              <a href="https://swopi.co/JanFrydl" rel="noopener noreferrer" target="_blank" class="mt-6 inline-block rounded-none bg-brand-primary-dark px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90">
+                Domluvit schůzku
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= RECENZE ======================= -->
+      <section id="recenze" class="py-14 md:py-20">
+        <div class="mx-auto max-w-screen-xl px-4 md:px-6">
+          <p class="mb-2 inline-block bg-brand-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">Recenze</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <h2 class="text-2xl font-extrabold uppercase md:text-3xl">Co říkají klienti</h2>
+            <div class="flex items-center gap-2">
+              <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
+                <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" />
+                <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z" />
+                <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
+              </svg>
+              <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+              <span class="sr-only">Hodnocení 5 z 5 hvězd na Google</span>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
+            <details class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 md:p-5">
+              <summary class="cursor-pointer list-none">
+                <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                <span class="ml-2 text-sm font-bold">Mar Két</span>
+                <span class="mt-2 block text-sm italic text-ui-muted">
+                  „Mám v pana Frýdla absolutní důvěru, takže s tím přichází i vnitřní klid ohledně finanční stránky naší rodiny.“
+                  <span class="font-bold not-italic text-brand-primary">Zobrazit celé →</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm text-ui-muted">
+                Má situace ohledně splácení závazků z předešla nebyla vůbec přívětivá. O to víc oceňuji, že se na schůzkách cítím vždy
+                příjemně a uvolněně. Pan Frýdl je velmi empatický a zároveň nad vším, o čem spolu mluvíme, opravdu rozmýšlí, což
+                jednoznačně cením. Díky tomu se určitě cítím klidněji, možná i bezpečněji. Mám v pana Frýdla absolutní důvěru, takže s
+                tím přichází i vnitřní klid ohledně finanční stránky naší rodiny.
+                <br /><br />
+                Pan Frýdl mi ukazuje, jak na ty peníze koukat z více úhlů, ne jen z toho jednoho, jako vlastně většina lidí. Ukáže a
+                vysvětlí vám, proč je důležité myslet i déle dopředu, ne jenom týden nebo měsíc.
+                <br /><br />
+                Určitě do toho jděte, pokud chcete svoji situaci změnit a prostě nevíte, za jaký konec to uchopit. Myslím si, že pan
+                Frýdl umí vše hezky, jasně a nenásilně vysvětlit a zároveň ukázat úplně nový úhel pohledu, jak na finance pohlížet.
+              </p>
+            </details>
+
+            <details class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 md:p-5">
+              <summary class="cursor-pointer list-none">
+                <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                <span class="ml-2 text-sm font-bold">Elisabeth Andriantsarazo</span>
+                <span class="mt-2 block text-sm italic text-ui-muted">
+                  „Mě osobně ušetřil bez přehánění stovky tisíc korun.“
+                  <span class="font-bold not-italic text-brand-primary">Zobrazit celé →</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm text-ui-muted">
+                Finance jsem měla nevyřešené a měla jsem v nich nepořádek. Předražená pojištění, hypotéky apod., nejistota kde a jak
+                investovat. Měla jsem k financím velmi negativní přístup a nedůvěřovala jsem finančním poradcům ani institucím.
+                <br /><br />
+                Díky spolupráci s panem Frýdlem se ale nyní cítím velmi dobře, mám pocit že mohu pokládat libovolné otázky a návrhy a
+                nemám nikdy pocit že by mi nebylo nasloucháno. Pan Frýdl vás nejdříve na první schůzce vyslechne a na základě tohoto
+                pohovoru pro vás vypracuje několik variant, jak by mohl pomoci. Je otevřen jakýmkoli návrhům, otázkám a nikdy vás do
+                ničeho nebude nutit ani vám říkat, že o něco přicházíte, konečné rozhodnutí bude totiž jen na vás a nechá vám vždy dost
+                času na rozmyšlenou.
+                <br /><br />
+                Celkově se dnes cítím mnohem lépe, zvláště z hlediska cashflow a úspor. Vím, že nyní ušetřím mnohem víc než dřív, což mi
+                přineslo nejen úplně jiný vztah k finančním poradcům a nástrojům, ale také vnitřní klid že je vše zajištěno i v případě,
+                kdy bych např. přišla o práci či by se mi stal nějaký úraz.
+                <br /><br />
+                Dívat se na majetek komplexně má smysl proto, že pak je možno sloučit různé aspekty dohromady, což ušetří člověku hodně
+                peněz. Pan Frýdl vám dá tipy a triky, o kterých normální člověk nemá ani ponětí. Mě osobně ušetřil bez přehánění stovky
+                tisíc korun.
+                <br /><br />
+                Určitě doporučuji minimálně to zkusit a jít alespoň na úvodní schůzku.
+              </p>
+            </details>
+
+            <details class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 md:p-5">
+              <summary class="cursor-pointer list-none">
+                <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                <span class="ml-2 text-sm font-bold">Victor Andriantsarazo</span>
+                <span class="mt-2 block text-sm italic text-ui-muted">
+                  „Jsem zcela přesvědčený, že pochopil, jaké jsou mé cíle, a vytvořili jsme spolu funkční finanční plán.“
+                  <span class="font-bold not-italic text-brand-primary">Zobrazit celé →</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm text-ui-muted">
+                Finance jsem dříve moc neřešil, hlavně protože jsem žádné moc neměl. Nicméně jsem určitě neměl (zatím nemám) dobré
+                návyky. Díky schůzkám s panem Frýdlem jsem však zcela přesvědčený, že pochopil, jaké jsou mé cíle, a vytvořili jsme
+                spolu funkční finanční plán.
+                <br /><br />
+                Určitě mě uklidňuje, že nyní vím, jak mé finance pracují a co se s nimi děje. Zároveň se určitě zvedá moje celková
+                finanční gramotnost, a jelikož rád věcem rozumím, tento přesah velmi oceňuji.
+                <br /><br />
+                Určitě bych znovu neváhal a finanční poradenství s tímto poradcem zkusil. Bohužel je kolem nás mnoho lidí se špatnými
+                zkušenostmi, nicméně pokud to člověka nic nestojí (pouze trocha času), tak zde není co ztratit :)
+              </p>
+            </details>
+
+            <details class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 md:p-5">
+              <summary class="cursor-pointer list-none">
+                <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                <span class="ml-2 text-sm font-bold">Debashis Roy</span>
+                <span class="mt-2 block text-sm italic text-ui-muted">
+                  „Our meetings have been a highly worthwhile investment of my time.“
+                  <span class="font-bold not-italic text-brand-primary">Zobrazit celé →</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm text-ui-muted">
+                Before we met with Mr Frydl, I felt quite uncertain and confused about my finances and overall wealth management.
+                However, our meetings have been a highly worthwhile investment of my time. I feel that I finally have a clearer
+                direction where I can focus my financial goals.
+                <br /><br />
+                The biggest shift for me is that I understand my money better now. I strongly believe in the value of having a
+                long-term partner in financial management. It is a relationship where both sides can truly benefit, provided that
+                certain external factors align well.
+                <br /><br />
+                If someone is currently hesitating whether to reach out to Mr Frydl, I would definitely tell them about my experience
+                with him. Overall, it has been a very positive step for me.
+              </p>
+            </details>
+
+            <details class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5 md:p-5 md:col-span-2">
+              <summary class="cursor-pointer list-none">
+                <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+                <span class="ml-2 text-sm font-bold">Richard Potter</span>
+                <span class="mt-2 block text-sm italic text-ui-muted">
+                  „Jan knew the options and could even find additional insurance options that would not have been available to me.“
+                  <span class="font-bold not-italic text-brand-primary">Zobrazit celé →</span>
+                </span>
+              </summary>
+              <p class="mt-3 text-sm text-ui-muted">
+                Before working with Jan my finances were okay in relation to my income because I am good at saving, but I did not know
+                how to make that money work for me in terms of investing it further. Jan highlighted a number of areas to consider
+                where wealth could be increased without risk. It's especially invaluable to me as a non-native because I don't know the
+                laws and rules in Czech Republic. I would have struggled to find the best deal for my mortgage but Jan knew the options
+                and could even find additional insurance options that would not have been available to me.
+                <br /><br />
+                I think the biggest shift is that I don't just hold on to the money in a bank or invest in shares without advice. With
+                someone in support who knows the different investment options and latest news and laws it gave me confidence to make
+                my money work for me. From our first meeting I knew he was hard working and tenacious which are key factors in good
+                results.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= PROČ PŘES PORADCE ======================= -->
+      <section class="py-14 md:py-20">
+        <div class="mx-auto max-w-screen-xl px-4 md:px-6">
+          <h2 class="text-2xl font-extrabold uppercase md:text-3xl">Proč přes poradce, ne rovnou do banky</h2>
+          <div class="mt-8 overflow-x-auto">
+            <table class="w-full min-w-[520px] border-collapse text-sm">
+              <thead>
+                <tr class="border-b-2 border-brand-dark text-left">
+                  <th class="py-3 pr-4 font-bold"></th>
+                  <th class="py-3 px-4 font-bold uppercase">Pobočka jedné banky</th>
+                  <th class="py-3 px-4 font-bold uppercase text-brand-primary">Jan Frýdl</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-black/10">
+                  <td class="py-3 pr-4">Srovnání nabídek všech bank</td>
+                  <td class="py-3 px-4 text-center" aria-label="ne">✕</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                </tr>
+                <tr class="border-b border-black/10">
+                  <td class="py-3 pr-4">Vyjednání sazby pod tabulkovou</td>
+                  <td class="py-3 px-4 text-center" aria-label="ne">✕</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                </tr>
+                <tr class="border-b border-black/10">
+                  <td class="py-3 pr-4">Konzultace zdarma, bez závazku</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                </tr>
+                <tr class="border-b border-black/10">
+                  <td class="py-3 pr-4">Nestandardní případy (OSVČ, paušál)</td>
+                  <td class="py-3 px-4 text-center text-ui-muted">omezeně</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                </tr>
+                <tr class="border-b border-black/10">
+                  <td class="py-3 pr-4">Vyřízení bez běhání po pobočkách</td>
+                  <td class="py-3 px-4 text-center text-ui-muted">často ne</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                </tr>
+                <tr class="border-b border-black/10">
+                  <td class="py-3 pr-4">Stejná konečná sazba i poplatky jako v bance</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ano">✓</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4">Vázanost na jednu banku</td>
+                  <td class="py-3 px-4 text-center" aria-label="ano">✓</td>
+                  <td class="py-3 px-4 text-center text-ui-success" aria-label="ne">✕</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= FAQ ======================= -->
+      <section class="bg-brand-primary-tint py-14 md:py-20">
+        <div class="mx-auto max-w-screen-xl px-4 md:px-6">
+          <h2 class="text-2xl font-extrabold uppercase md:text-3xl">Časté otázky</h2>
+          <div data-accordion class="mt-8 flex flex-col divide-y divide-black/10 rounded-sm bg-brand-light shadow-card">
+            <details class="group p-4 md:p-5">
+              <summary class="cursor-pointer list-none font-bold marker:content-none">
+                <span class="flex items-center justify-between">Kolik mě to bude stát?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
+              </summary>
+              <p class="mt-3 text-ui-muted">
+                Nic. Moji odměnu hradí banka, u které nakonec hypotéku sjednáte, ne vy. Nikdy si neúčtuju odměnu od klienta i banky
+                zároveň, to zákon nedovoluje a ani by to nebylo fér.
+              </p>
+            </details>
+            <details class="group p-4 md:p-5">
+              <summary class="cursor-pointer list-none font-bold marker:content-none">
+                <span class="flex items-center justify-between">Zavazuju se k něčemu odesláním formuláře?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
+              </summary>
+              <p class="mt-3 text-ui-muted">Ne. Zavoláme si, projdeme vaši situaci a připravím srovnání, bez závazku hypotéku sjednat.</p>
+            </details>
+            <details class="group p-4 md:p-5">
+              <summary class="cursor-pointer list-none font-bold marker:content-none">
+                <span class="flex items-center justify-between">Je výpočet z kalkulačky přesný?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
+              </summary>
+              <p class="mt-3 text-ui-muted">
+                Je orientační. Počítá s nejnižší veřejně dostupnou sazbou pro vaše parametry, ale skutečnou sazbu vždy určuje banka podle vaší
+                bonity, LTV a doplňkových produktů. Proto vám po odeslání formuláře připravím srovnání na míru.
+              </p>
+            </details>
+            <details class="group p-4 md:p-5">
+              <summary class="cursor-pointer list-none font-bold marker:content-none">
+                <span class="flex items-center justify-between">Kolik vlastních zdrojů potřebuju?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
+              </summary>
+              <p class="mt-3 text-ui-muted">
+                Standardně alespoň 20 % ceny nemovitosti (LTV do 80 %). Pokud vám ještě není 36 let, banky u vlastního bydlení umožňují až
+                90% LTV, tedy jen 10 % vlastních zdrojů. U investiční nemovitosti se počítá s max. 70% LTV.
+              </p>
+            </details>
+            <details class="group p-4 md:p-5">
+              <summary class="cursor-pointer list-none font-bold marker:content-none">
+                <span class="flex items-center justify-between">Kdy mám začít řešit končící fixaci?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
+              </summary>
+              <p class="mt-3 text-ui-muted">
+                Ideálně 4–6 měsíců před koncem fixace. Máte dost času na srovnání bank i případný přechod k jiné bance bez spěchu a bez
+                sankcí.
+              </p>
+            </details>
+            <details class="group p-4 md:p-5">
+              <summary class="cursor-pointer list-none font-bold marker:content-none">
+                <span class="flex items-center justify-between">Jsem OSVČ na paušální dani, dostanu hypotéku?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
+              </summary>
+              <p class="mt-3 text-ui-muted">
+                Ve většině případů ano. Je to jeden z nestandardních případů, které řeším běžně. Banky se v přístupu k OSVČ na paušální
+                dani liší, proto se vyplatí srovnání o to víc.
+              </p>
+            </details>
+            <details class="group p-4 md:p-5">
+              <summary class="cursor-pointer list-none font-bold marker:content-none">
+                <span class="flex items-center justify-between">Jak dlouho trvá vyřízení?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
+              </summary>
+              <p class="mt-3 text-ui-muted">
+                Od podání žádosti do vyplacení obvykle 3–6 týdnů, záleží na bance a rychlosti dodání podkladů. První srovnání bank máte v
+                mailu do 24 hodin od odeslání formuláře.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= ZÁVĚREČNÝ FORMULÁŘ ======================= -->
+      <section class="py-14 md:py-20">
+        <div class="mx-auto max-w-2xl px-4 md:px-6">
+          <h2 class="text-center text-2xl font-extrabold uppercase md:text-3xl">Chci srovnání bank zdarma</h2>
+          <p class="mt-3 text-center text-ui-muted">
+            Nechte mi na sebe kontakt a do 24 hodin vám připravím osobní srovnání nabídek, zdarma a nezávazně.
+          </p>
+
+          <div id="form2-obal" class="mt-8">
+            <form id="form-zaverecny" novalidate class="rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
+              <div class="grid gap-4">
+                <div>
+                  <label for="f2-jmeno" class="mb-1 block text-sm font-bold">Jméno a příjmení</label>
+                  <input type="text" id="f2-jmeno" name="jmeno" data-pole="jmeno" autocomplete="name" required class="w-full rounded-sm border border-black/10 px-3 py-2" aria-describedby="f2-err-jmeno" />
+                  <p id="f2-err-jmeno" data-chyba="jmeno" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                </div>
+                <div>
+                  <label for="f2-telefon" class="mb-1 block text-sm font-bold">Telefon</label>
+                  <input type="tel" id="f2-telefon" name="telefon" data-pole="telefon" autocomplete="tel" required class="w-full rounded-sm border border-black/10 px-3 py-2" aria-describedby="f2-err-telefon" />
+                  <p id="f2-err-telefon" data-chyba="telefon" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                </div>
+                <div>
+                  <label for="f2-email" class="mb-1 block text-sm font-bold">E-mail</label>
+                  <input type="email" id="f2-email" name="email" data-pole="email" autocomplete="email" required class="w-full rounded-sm border border-black/10 px-3 py-2" aria-describedby="f2-err-email" />
+                  <p id="f2-err-email" data-chyba="email" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                  <button type="button" data-role="oprava-emailu" hidden class="mt-1 text-sm font-bold text-brand-primary underline"></button>
+                </div>
+                <div>
+                  <label for="f2-situace" class="mb-1 block text-sm font-bold">Co řešíte?</label>
+                  <select id="f2-situace" name="situace" data-pole="situace" required class="w-full rounded-sm border border-black/10 px-3 py-2" aria-describedby="f2-err-situace">
+                    <option value="">Vyberte…</option>
+                    <option value="Kupuji nemovitost">Kupuji nemovitost</option>
+                    <option value="Končí mi fixace">Končí mi fixace</option>
+                    <option value="Chci vědět, kolik dostanu">Chci vědět, kolik dostanu</option>
+                    <option value="Něco jiného">Něco jiného</option>
+                  </select>
+                  <p id="f2-err-situace" data-chyba="situace" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                </div>
+
+                <div class="pole-pro-boty" aria-hidden="true">
+                  <label for="f2-web">Vaše webová stránka</label>
+                  <input type="text" id="f2-web" name="web" data-pole="honeypot" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <div>
+                  <label class="flex items-start gap-2 text-sm">
+                    <input type="checkbox" id="f2-souhlas" name="souhlas" data-pole="souhlas" required class="mt-1 accent-brand-primary" aria-describedby="f2-err-souhlas" />
+                    <span>Souhlasím se <a href="/gdpr" class="underline">zpracováním osobních údajů</a> za účelem přípravy nabídky.</span>
+                  </label>
+                  <p id="f2-err-souhlas" data-chyba="souhlas" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
+                </div>
+
+                <p data-role="chyba-obecna" hidden role="alert" class="rounded-sm bg-ui-warning-tint p-3 text-sm text-ui-warning-text"></p>
+
+                <button type="submit" data-role="btn-odeslat" class="w-full rounded-none bg-brand-primary py-3 text-base font-bold uppercase tracking-wide text-white transition hover:opacity-90 focus-visible:opacity-90">
+                  Chci srovnání zdarma
+                </button>
+              </div>
+            </form>
+
+            <div id="form2-diky" hidden class="rounded-sm bg-brand-light p-5 text-center shadow-card ring-1 ring-black/5 md:p-6">
+              <h3 class="text-xl font-extrabold uppercase text-ui-success">Děkujeme, máme to!</h3>
+              <p class="mt-2">Ozvu se vám do 24 hodin (Po–Pá do 1 hodiny).</p>
+              <a href="tel:+420731444770" class="mt-4 inline-flex items-center gap-2 rounded-none bg-brand-primary-dark px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90">
+                📞 Zavolat rovnou
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================= PATIČKA ======================= -->
+    <footer class="bg-brand-dark py-10 text-white/80">
+      <div class="mx-auto max-w-screen-xl px-4 md:px-6">
+        <div class="grid gap-8 md:grid-cols-3">
+          <div>
+            <p class="text-lg font-bold uppercase text-white">Jan Frýdl</p>
+            <p class="text-sm">Správce majetku</p>
+            <ul class="mt-3 flex flex-col gap-1 text-sm">
+              <li><a href="mailto:jan.frydl@4fin.cz" class="underline">jan.frydl@4fin.cz</a></li>
+              <li><a href="tel:+420731444770" class="underline">+420 731 444 770</a></li>
+              <li><a href="https://www.instagram.com/jan_frydl" target="_blank" rel="noopener noreferrer" class="underline">@jan_frydl</a></li>
+              <li><a href="https://swopi.co/JanFrydl" target="_blank" rel="noopener noreferrer" class="underline">Rezervovat schůzku</a></li>
+            </ul>
+          </div>
+
+          <div class="text-sm md:col-span-2">
+            <p>
+              TODO: Jan Frýdl / obchodní firma, IČO, sídlo. Doplní klient.
+            </p>
+            <p class="mt-2">
+              TODO: Jan Frýdl působí jako [vázaný zástupce / samostatný zprostředkovatel] pro 4fin, [obchodní název 4fin], IČO [doplnit].
+              Doplní klient dle skutečnosti.
+            </p>
+            <p class="mt-2">
+              TODO: číslo v registru ČNB, doplní klient. Registr lze ověřit na
+              <a href="https://apl.cnb.cz/apljerrsdad/JERRS.WEB07.INTRO_PAGE" target="_blank" rel="noopener noreferrer" class="underline">
+                apl.cnb.cz
+              </a>.
+            </p>
+            <p class="mt-3">
+              Zprostředkování spotřebitelského úvěru na bydlení podle zákona č. 257/2016 Sb. Orgánem dohledu je Česká národní banka. Služba
+              je pro klienta bezplatná, odměnu hradí poskytovatel úvěru.
+            </p>
+            <p class="mt-3 flex gap-4">
+              <a href="/gdpr" class="underline">Ochrana osobních údajů</a>
+              <a href="/cookies" class="underline">Cookies</a>
+            </p>
+          </div>
+        </div>
+        <p class="mt-8 text-xs text-white/50">© 2026 Jan Frýdl. Všechna práva vyhrazena.</p>
+      </div>
+    </footer>
+
+    <!-- ======================= STICKY CTA (mobil) ======================= -->
+    <div id="sticky-cta" class="fixed inset-x-0 bottom-0 z-40 flex translate-y-full items-center justify-between gap-2 bg-brand-primary p-3 text-white shadow-card transition-transform duration-300 md:hidden">
+      <a href="#gate-form" class="flex-1 rounded-none bg-brand-primary-dark py-2 text-center text-sm font-bold uppercase">Chci srovnání zdarma</a>
+      <a href="tel:+420731444770" aria-label="Zavolat Janu Frýdlovi" class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white text-brand-primary">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1L6.6 10.8z" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- ======================= COOKIE LIŠTA ======================= -->
+    <!-- Na mobilu nahoře (ne dole), aby se nikdy nepřekrývala se sticky CTA lištou. -->
+    <div
+      id="cookie-lista"
+      class="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-brand-light p-4 shadow-card md:inset-x-auto md:top-auto md:bottom-4 md:left-4 md:right-auto md:max-w-md md:rounded-sm md:border"
+      role="dialog"
+      aria-label="Nastavení cookies"
+    >
+      <p class="text-sm">
+        Používáme cookies pro nezbytný chod webu, případně analytiku a marketing. Víc v
+        <a href="/cookies" class="underline">zásadách cookies</a>.
+      </p>
+      <div id="cookie-nastaveni" hidden class="mt-3 flex flex-col gap-2 text-sm">
+        <label class="flex items-center gap-2"><input type="checkbox" id="cookie-analytika" class="accent-brand-primary" /> Analytika (návštěvnost)</label>
+        <label class="flex items-center gap-2"><input type="checkbox" id="cookie-marketing" class="accent-brand-primary" /> Marketing (Meta Pixel)</label>
+        <button type="button" id="cookie-ulozit-nastaveni" class="mt-1 rounded-none bg-brand-primary py-2 text-sm font-bold uppercase text-white">Uložit nastavení</button>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <button type="button" id="cookie-jen-nezbytne" class="rounded-none border-2 border-brand-primary px-3 py-2 text-xs font-bold uppercase">Jen nezbytné</button>
+        <button type="button" id="cookie-nastavit" class="rounded-none border-2 border-brand-primary px-3 py-2 text-xs font-bold uppercase">Nastavit</button>
+        <button type="button" id="cookie-prijmout-vse" class="rounded-none bg-brand-primary px-3 py-2 text-xs font-bold uppercase text-white">Přijmout vše</button>
+      </div>
+    </div>
+  </body>
+</html>

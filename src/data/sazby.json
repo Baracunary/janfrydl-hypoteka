@@ -1,0 +1,19 @@
+{
+  "aktualizovano": "2026-08-24",
+  "zdroj": "Hypoindex.cz — minimální nabídkové sazby bank",
+  "prumerna_nabidkova_sazba": 5.42,
+  "prumerna_zdroj": "Swiss Life Hypoindex, srpen 2026",
+  "sazba_kterou_vyjednavam": 4.99,
+  "banky": [
+    { "nazev": "Fio banka",           "fix1": 4.68, "fix3": 4.58, "fix5": 4.68, "ltv_max": 80 },
+    { "nazev": "Moneta Money Bank",   "fix1": 4.79, "fix3": 4.99, "fix5": 5.09, "ltv_max": 80 },
+    { "nazev": "Air Bank",            "fix1": null, "fix3": 4.99, "fix5": 5.09, "ltv_max": 90 },
+    { "nazev": "Raiffeisenbank",      "fix1": 4.99, "fix3": 5.04, "fix5": 5.19, "ltv_max": 80 },
+    { "nazev": "Partners Banka",      "fix1": 5.09, "fix3": 5.29, "fix5": 5.59, "ltv_max": 80 },
+    { "nazev": "UniCredit Bank",      "fix1": null, "fix3": 5.19, "fix5": 5.59, "ltv_max": 80 },
+    { "nazev": "Komerční banka",      "fix1": 5.19, "fix3": 5.39, "fix5": 5.74, "ltv_max": 80 },
+    { "nazev": "Česká spořitelna",    "fix1": 5.29, "fix3": 5.09, "fix5": 5.29, "ltv_max": 80 },
+    { "nazev": "mBank",               "fix1": 5.99, "fix3": 5.29, "fix5": 5.49, "ltv_max": 80 },
+    { "nazev": "ČSOB / Hypoteční b.", "fix1": 5.39, "fix3": 5.39, "fix5": 5.59, "ltv_max": 80 }
+  ]
+}

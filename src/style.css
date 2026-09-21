@@ -172,3 +172,10 @@ input[type="range"]::-moz-range-track {
     filter: blur(3px);
   }
 }
+
+/* Zkrácené okno zamčeného obsahu — na mobilu i desktopu ať je vidět další
+   blok (hook + formulář) co nejdřív, ne až po odscrollování celé tabulky. */
+.gate-vyska-omezena {
+  max-height: 220px;
+  overflow: hidden;
+}

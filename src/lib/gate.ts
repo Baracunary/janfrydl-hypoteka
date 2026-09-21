@@ -32,7 +32,7 @@ export function odemkniSrovnani(stav: KalkulackaStav): void {
   const uspora = el('gate-uspora')
   const fixaceDoporuceni = el('gate-fixace-doporuceni')
 
-  obalGate.classList.remove('gate-rozmazano')
+  obalGate.classList.remove('gate-rozmazano', 'gate-vyska-omezena')
   zamekOverlay.hidden = true
 
   const ltvProSrovnani = stav.rezim === 'koupe' ? stav.ltv : 80

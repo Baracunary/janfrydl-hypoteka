@@ -30,6 +30,7 @@ export interface KalkulackaStav {
   splatka: number
   do36: boolean
   ucel: UcelUveru
+  ltvNadLimit: boolean
   refi?: {
     soucasnaSazba: number
     zbyvajiciDoba: number
@@ -48,6 +49,7 @@ let aktualniStav: KalkulackaStav = {
   splatka: 0,
   do36: false,
   ucel: 'vlastni_bydleni',
+  ltvNadLimit: false,
 }
 
 export function ziskejAktualniStav(): KalkulackaStav {
@@ -156,16 +158,14 @@ export function inicializujKalkulacku(): void {
       const vLimitu = ltv <= limit
       ltvStav.textContent = vLimitu ? `v limitu ČNB (max. ${limit} %)` : `nad limitem ČNB (max. ${limit} %)`
       ltvStav.dataset.stav = vLimitu ? 'ok' : 'warning'
+      aktualniStav.ltvNadLimit = !vLimitu
 
       if (vLimitu) {
         ltvUpozorneni.hidden = true
       } else {
         ltvUpozorneni.hidden = false
-        const limitniVeta =
-          aktualniStav.ucel === 'investice'
-            ? `Banky u investiční nemovitosti standardně financují do ${limit} %.`
-            : `Banky standardně financují do ${limit} % (do 36 let 90 %).`
-        ltvUpozorneniText.textContent = `S tímto vkladem se dostáváte na LTV ${formatujProcenta(ltv, 0)}. ${limitniVeta} Řešitelné to je, ozvěte se a projdeme možnosti.`
+        const pozadovanoProcent = Math.round(100 - limit)
+        ltvUpozorneniText.textContent = `Nemáte ${pozadovanoProcent} % vlastních zdrojů? Nezoufejte, nemusí to být konec. Dejte mi vědět přes formulář níže a zkusíme to vymyslet jinak.`
       }
 
       aktualizujGateHook(jistina, aktualniStav.fixace, ltv, aktualniStav.roky)
@@ -180,6 +180,7 @@ export function inicializujKalkulacku(): void {
       aktualniStav.splatka = nova.splatka
       aktualniStav.roky = refiStav.zbyvajiciDoba
       aktualniStav.fixace = 3
+      aktualniStav.ltvNadLimit = false
       aktualniStav.refi = { ...refiStav }
 
       vysledekSplatka.textContent = formatujCislo(nova.splatka)

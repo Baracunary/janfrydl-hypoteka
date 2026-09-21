@@ -17,6 +17,7 @@ interface KalkulackaPayload {
   splatka: number
   do36: boolean
   ucel: string
+  ltv_nad_limit?: boolean
   [klic: string]: unknown
 }
 
@@ -88,8 +89,9 @@ async function posliEmail(lead: LeadPayload): Promise<boolean> {
       ${k.rezim === 'koupe' ? `<li>LTV: ${k.ltv.toFixed(0)} %</li>` : ''}
       <li>Orientační splátka: ${formatujKcServer(k.splatka)} / měsíc</li>
       ${k.rezim === 'koupe' ? `<li>Mladší 36 let: ${k.do36 ? 'ano' : 'ne'}</li>` : ''}
-      ${k.ucel ? `<li>Účel: ${k.ucel === 'investice' ? 'investice (pronájem)' : 'vlastní bydlení'}</li>` : ''}
+      ${k.ucel ? `<li>Účel: ${k.ucel === 'investice' ? 'investice (již vlastní více než 1 nemovitost)' : 'vlastní bydlení'}</li>` : ''}
     </ul>
+    ${k.ltv_nad_limit ? `<p style="color:#96590c;font-weight:bold">⚠ Nedostatek vlastních zdrojů — LTV nad limit ČNB. Klient bude potřebovat probrat řešení osobně.</p>` : ''}
     <h3>Zdroj návštěvy</h3>
     <ul>
       <li>UTM zdroj: ${lead.utm.source || '—'} / ${lead.utm.medium || '—'} / ${lead.utm.campaign || '—'}</li>

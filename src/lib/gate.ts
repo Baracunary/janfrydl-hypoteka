@@ -28,6 +28,7 @@ export function odemkniSrovnani(stav: KalkulackaStav): void {
   const obalGate = el('gate-obal')
   const zamekOverlay = el('gate-zamek-overlay')
   const tabulkaTelo = el<HTMLTableSectionElement>('gate-tabulka-telo')
+  const tabulkaHlavicka = el('gate-tabulka-hlavicka')
   const uspora = el('gate-uspora')
   const fixaceDoporuceni = el('gate-fixace-doporuceni')
 
@@ -37,6 +38,8 @@ export function odemkniSrovnani(stav: KalkulackaStav): void {
   const ltvProSrovnani = stav.rezim === 'koupe' ? stav.ltv : 80
   const fixaceProSrovnani = stav.rezim === 'koupe' ? stav.fixace : 3
   const banky = bankyProLTV(sazby.banky, fixaceProSrovnani, ltvProSrovnani, 5)
+
+  tabulkaHlavicka.textContent = `Sazba (${fixaceProSrovnani}letá fixace)`
 
   tabulkaTelo.innerHTML =
     banky

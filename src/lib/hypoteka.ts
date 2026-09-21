@@ -61,11 +61,20 @@ export function limitLTV(ucel: UcelUveru, mladsiNez36: boolean): number {
   return mladsiNez36 ? 90 : 80
 }
 
+/**
+ * Minimální přirážka 5leté fixace nad 3letou (v procentních bodech).
+ * Banky ji v datech ze sazebníků občas nedodržují — zde ji vynucujeme,
+ * aby 5letá fixace nikdy nevycházela levněji (nebo jen zanedbatelně dráž) než 3letá.
+ */
+export const PRIRAZKA_FIXACE_5 = 0.5
+
 /** Sazba banky pro danou fixaci, nebo null pokud ji banka nenabízí. */
 function sazbaBankyProFixaci(banka: Banka, fixace: Fixace): number | null {
   if (fixace === 1) return banka.fix1
   if (fixace === 3) return banka.fix3
-  return banka.fix5
+  if (banka.fix5 === null) return null
+  if (banka.fix3 === null) return banka.fix5
+  return Math.max(banka.fix5, banka.fix3 + PRIRAZKA_FIXACE_5)
 }
 
 /** Banky, které vyhoví danému LTV a nabízí zvolenou fixaci, seřazené od nejlevnější. */

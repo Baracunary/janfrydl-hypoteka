@@ -51,6 +51,7 @@ function sestavPayload(
       splatka: stav.splatka,
       do36: stav.do36,
       ucel: stav.rezim === 'koupe' ? stav.ucel : '',
+      ltv_nad_limit: stav.ltvNadLimit,
       ...(stav.refi
         ? {
             refi_soucasna_sazba: stav.refi.soucasnaSazba,

@@ -128,7 +128,7 @@ export function inicializujKalkulacku(): void {
     const rozpeti = jistina > 0 ? vypocitejRozpetiSazeb(sazby.banky, fixace, ltv, jistina, roky) : null
     gateHookText.textContent =
       rozpeti && rozpeti.rozdilZaFixaci > 0
-        ? `U úvěru ${formatujKc(jistina)} je rozdíl mezi nejlevnější a nejdražší bankou z aktuálních sazebníků až ${formatujKc(rozpeti.rozdilZaFixaci)} za dobu ${fixace}leté fixace.`
+        ? `U úvěru ${formatujKc(jistina)} je rozdíl mezi nejlevnější a nejdražší bankou z aktuálních sazebníků až ${formatujKc(rozpeti.rozdilZaFixaci)} na úrocích za dobu ${fixace}leté fixace.`
         : `Rozdíl mezi bankami je teď na trhu větší než kdy jindy.`
   }
 

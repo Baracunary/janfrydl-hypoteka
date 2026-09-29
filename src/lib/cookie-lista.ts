@@ -1,4 +1,4 @@
-// Cookie lišta — tři tlačítka (Jen nezbytné / Nastavit / Přijmout vše).
+// Cookie lišta — na první obrazovce Nastavit / Přijmout vše, „Jen nezbytné“ je v panelu Nastavit.
 // Nesmí překrývat CTA na mobilu ani být fullscreen — viz layout v index.html.
 
 import { ziskejSouhlas, ulozSouhlas } from './consent'

@@ -1,4 +1,4 @@
-// Stav cookie souhlasu — tři úrovně dle cookie lišty (Jen nezbytné / Nastavit / Přijmout vše).
+// Stav cookie souhlasu — úrovně dle cookie lišty (Přijmout vše / Nastavit, v něm i Jen nezbytné).
 // Marketingové a analytické skripty se načítají výhradně po udělení příslušného souhlasu.
 
 export interface Souhlas {

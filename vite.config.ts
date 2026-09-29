@@ -36,6 +36,8 @@ function mockLeadApiVDevu(): Plugin {
 // Vícestránkový build: hlavní landing page + samostatné právní stránky.
 export default defineConfig({
   plugins: [tailwindcss(), mockLeadApiVDevu()],
+  // Klientské proměnné mají v projektu prefix PUBLIC_ (viz .env.example) — Vite jinak propouští jen VITE_.
+  envPrefix: ['VITE_', 'PUBLIC_'],
   build: {
     rollupOptions: {
       input: {

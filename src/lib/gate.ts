@@ -31,6 +31,7 @@ export function odemkniSrovnani(stav: KalkulackaStav): void {
   const tabulkaHlavicka = el('gate-tabulka-hlavicka')
   const uspora = el('gate-uspora')
   const fixaceDoporuceni = el('gate-fixace-doporuceni')
+  const aktualizace = el('gate-aktualizace')
 
   obalGate.classList.remove('gate-rozmazano', 'gate-vyska-omezena')
   zamekOverlay.hidden = true
@@ -69,6 +70,9 @@ export function odemkniSrovnani(stav: KalkulackaStav): void {
   fixaceDoporuceni.textContent = doporuceni
     ? `Podle aktuálních sazeb pro vaše LTV vychází nejlépe ${doporuceni.fixace}letá fixace (${formatujProcenta(doporuceni.sazba, 2)} p.a.).`
     : `Délku fixace vám doporučím na míru podle vaší situace.`
+
+  const [rok, mesic, den] = sazby.aktualizovano.split('-').map(Number)
+  aktualizace.textContent = `Sazby bank aktualizovány k ${den}. ${mesic}. ${rok}, zdroj: Hypoindex.cz.`
 
   obalGate.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }

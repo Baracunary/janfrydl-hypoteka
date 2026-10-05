@@ -145,7 +145,8 @@
                 <span class="sr-only">Hodnocení 5 z 5 hvězd na Google</span>
               </div>
 
-              <div class="relative mt-3">
+              <!-- na mobilu skryto — zůstává jen odznak Google ★★★★★, ať je kalkulačka co nejdřív vidět -->
+              <div class="relative mt-3 hidden md:block">
                 <button
                   type="button"
                   aria-label="Předchozí recenze"
@@ -370,6 +371,18 @@
               <p id="vysledek-sazba-info" class="mt-3 text-xs text-ui-muted"></p>
             </div>
 
+            <!-- Hned pod splátkou proklik na krok 2 (formulář) -->
+            <div data-cta-formular class="mt-4">
+              <a
+                href="#krok-2"
+                class="cta-formular flex w-full items-center justify-center gap-2 rounded-none bg-brand-primary px-4 py-4 text-center text-base font-bold uppercase tracking-wide text-white shadow-card"
+              >
+                Zjistit nejlevnější banku
+                <span aria-hidden="true" class="cta-sipka text-xl leading-none">↓</span>
+              </a>
+              <p class="mt-2 text-center text-xs font-medium text-ui-muted">Krok 2 z 2 · zdarma · vyplnění za 10 vteřin</p>
+            </div>
+
             <!-- LTV upozornění — neblokující, navázané na CTA -->
             <div id="ltv-upozorneni" hidden class="mt-4 rounded-sm bg-ui-warning-tint p-4">
               <p id="ltv-upozorneni-text" class="text-sm text-ui-warning-text"></p>
@@ -386,7 +399,7 @@
 
         <!-- ==== KROK 2: gate na formulář ==== -->
         <div class="mx-auto max-w-screen-xl px-4 pb-12 md:px-6 lg:pb-20">
-          <div class="mx-auto max-w-3xl">
+          <div id="krok-2" class="mx-auto max-w-3xl scroll-mt-20">
             <p class="mb-2 text-center text-xs font-bold uppercase tracking-wider text-brand-primary">Krok 2 z 2 · poslední krok</p>
             <h2 class="text-center text-2xl font-extrabold uppercase md:text-3xl">Tohle o své hypotéce ještě nevíte</h2>
             <p class="mx-auto mt-2 max-w-lg text-center text-ui-muted">
@@ -433,10 +446,14 @@
                 <p id="gate-aktualizace" class="mt-2 text-xs text-ui-muted"></p>
               </div>
 
-              <div id="gate-zamek-overlay" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/70 text-center">
+              <a href="#gate-form" id="gate-zamek-overlay" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/70 text-center">
                 <span aria-hidden="true" class="text-3xl">🔒</span>
-                <p class="max-w-xs text-sm font-bold">Odemkne se odesláním formuláře níže</p>
-              </div>
+                <span class="max-w-xs text-sm font-bold">Odemkne se odesláním formuláře níže</span>
+                <span class="cta-formular mt-1 inline-flex items-center gap-2 rounded-none bg-brand-primary px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-card">
+                  Odemknout zdarma
+                  <span aria-hidden="true" class="cta-sipka text-xl leading-none">↓</span>
+                </span>
+              </a>
             </div>
 
             <div class="mt-8 rounded-sm bg-brand-primary-dark p-5 text-white md:p-6">
@@ -450,7 +467,7 @@
             </div>
 
             <div id="gate-form-obal" class="mt-6">
-              <form id="gate-form" novalidate class="rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
+              <form id="gate-form" novalidate class="scroll-mt-20 rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
                 <div class="grid gap-4">
                   <div>
                     <label for="gate-jmeno" class="mb-1 block text-sm font-bold">Jméno a příjmení</label>
@@ -590,6 +607,13 @@
             Když vám končí fixace, banka vám sama pošle nabídku nové sazby. Ta ale málokdy bývá nejlepší na trhu. Než ji podepíšete,
             nechte si ji porovnat s ostatními bankami.
           </p>
+          <!-- Proklik na formulář -->
+          <div data-cta-formular class="mt-6">
+            <a href="#gate-form" class="cta-formular flex w-full md:inline-flex md:w-auto md:px-8 items-center justify-center gap-2 rounded-none bg-white text-brand-primary-dark px-4 py-4 text-center text-base font-bold uppercase tracking-wide shadow-card">
+              Chci srovnání zdarma
+              <span aria-hidden="true" class="cta-sipka [--sipka-x:4px] [--sipka-y:0]">→</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -613,6 +637,13 @@
               <h3 class="mt-2 text-lg font-bold uppercase">Vyřídíme to bez běhání po pobočkách</h3>
               <p class="mt-2 text-ui-muted">Zastupuju vás v jednání s bankami a vyjednávám sazbu, vy jen podepisujete.</p>
             </div>
+          </div>
+          <!-- Proklik na formulář -->
+          <div data-cta-formular class="mt-8">
+            <a href="#form-zaverecny" class="cta-formular flex w-full md:inline-flex md:w-auto md:px-8 items-center justify-center gap-2 rounded-none bg-brand-primary text-white px-4 py-4 text-center text-base font-bold uppercase tracking-wide shadow-card">
+              Začít srovnáním zdarma
+              <span aria-hidden="true" class="cta-sipka [--sipka-x:4px] [--sipka-y:0]">→</span>
+            </a>
           </div>
         </div>
       </section>
@@ -798,6 +829,13 @@
               </p>
             </details>
           </div>
+          <!-- Proklik na formulář -->
+          <div data-cta-formular class="mt-8">
+            <a href="#form-zaverecny" class="cta-formular flex w-full md:inline-flex md:w-auto md:px-8 items-center justify-center gap-2 rounded-none bg-brand-primary text-white px-4 py-4 text-center text-base font-bold uppercase tracking-wide shadow-card">
+              Chci to taky zkusit
+              <span aria-hidden="true" class="cta-sipka [--sipka-x:4px] [--sipka-y:0]">→</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -934,7 +972,7 @@
           </p>
 
           <div id="form2-obal" class="mt-8">
-            <form id="form-zaverecny" novalidate class="rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
+            <form id="form-zaverecny" novalidate class="scroll-mt-20 rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
               <div class="grid gap-4">
                 <div>
                   <label for="f2-jmeno" class="mb-1 block text-sm font-bold">Jméno a příjmení</label>

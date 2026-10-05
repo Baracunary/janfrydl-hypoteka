@@ -179,3 +179,30 @@ input[type="range"]::-moz-range-track {
   max-height: 220px;
   overflow: hidden;
 }
+
+/* Prokliky na formulář — pohupující se šipka láká ke kliknutí,
+   animuje se jen transform. Při reduced-motion ji vypne globální pravidlo nahoře. */
+.cta-formular {
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+}
+.cta-formular:hover,
+.cta-formular:focus-visible {
+  opacity: 0.9;
+}
+.cta-formular:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+.cta-sipka {
+  display: inline-block;
+  animation: cta-sipka 1.4s ease-in-out infinite;
+}
+@keyframes cta-sipka {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(var(--sipka-x, 0), var(--sipka-y, 4px));
+  }
+}

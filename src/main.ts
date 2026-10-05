@@ -36,6 +36,8 @@ function zobrazDikyStav(): void {
   document.getElementById('gate-diky')?.removeAttribute('hidden')
   document.getElementById('form-zaverecny')?.setAttribute('hidden', '')
   document.getElementById('form2-diky')?.removeAttribute('hidden')
+  // Prokliky na formulář po odeslání nedávají smysl — formuláře jsou skryté.
+  document.querySelectorAll<HTMLElement>('[data-cta-formular]').forEach((cta) => (cta.hidden = true))
 
   if (!leadJizOdeslan) {
     leadJizOdeslan = true

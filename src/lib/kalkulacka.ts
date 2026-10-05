@@ -123,13 +123,13 @@ export function inicializujKalkulacku(): void {
 
   // Loss-aversion hák nad gate formulářem — reálné rozpětí sazeb pro aktuální
   // úvěr a fixaci, ne slib úspory. Ukazuje se ještě PŘED odesláním formuláře,
-  // teprve to, KTERÁ konkrétní banka a přesná vyjednaná sazba, je za gate.
+  // Konkrétní banku a sazbu Jan ověří osobně a pošle po odeslání formuláře.
   function aktualizujGateHook(jistina: number, fixace: Fixace, ltv: number, roky: number) {
     const rozpeti = jistina > 0 ? vypocitejRozpetiSazeb(sazby.banky, fixace, ltv, jistina, roky) : null
     gateHookText.textContent =
       rozpeti && rozpeti.rozdilZaFixaci > 0
-        ? `U úvěru ${formatujKc(jistina)} je rozdíl mezi nejlevnější a nejdražší bankou z aktuálních sazebníků až ${formatujKc(rozpeti.rozdilZaFixaci)} na úrocích za dobu ${fixace}leté fixace.`
-        : `Rozdíl mezi bankami je teď na trhu větší než kdy jindy.`
+        ? `Podle veřejných sazebníků je u úvěru ${formatujKc(jistina)} rozdíl mezi nejlevnější a nejdražší bankou až ${formatujKc(rozpeti.rozdilZaFixaci)} na úrocích za dobu ${fixace}leté fixace.`
+        : `Rozdíly mezi bankami umí být i u stejné hypotéky překvapivě velké.`
   }
 
   // --- Přepočet + render výsledku ---
@@ -201,7 +201,7 @@ export function inicializujKalkulacku(): void {
           : `Nová tržní sazba je aktuálně vyšší, o ${formatujKc(Math.abs(rozdil))} / měsíc. Přesto se vyplatí srovnat všechny banky, ne jen tu vaši současnou.`
 
       // Pro refinancování nemáme LTV z kalkulačky (nezadává se cena nemovitosti) —
-      // použijeme 80 %, stejnou konvenci jako u odemčeného srovnání bank v gate.ts.
+      // použijeme 80 %.
       aktualizujGateHook(jistina, 3, 80, refiStav.zbyvajiciDoba)
     }
   }

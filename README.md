@@ -15,7 +15,7 @@ npm run dev
 
 Terminál vypíše adresu (obvykle `http://localhost:5173`) — otevřete ji v prohlížeči.
 
-**Důležité:** `npm run dev` spouští jen frontend (Vite), ne serverless funkci `api/lead.ts` — tu umí spustit až Vercel. Aby šlo v lokálním náhledu otestovat celý tok formuláře (odemčení srovnání, děkovná obrazovka), je ve `vite.config.ts` malý vývojářský "mock", který na `/api/lead` odpoví rovnou `{ ok: true }`, aniž by se cokoliv reálně odeslalo — v terminálu, kde běží `npm run dev`, uvidíte řádek `[DEV MOCK] /api/lead přijal poptávku`. Tenhle mock se v produkčním buildu ani po nasazení na Vercel vůbec nepoužije, tam se volá skutečná funkce z `api/lead.ts`.
+**Důležité:** `npm run dev` spouští jen frontend (Vite), ne serverless funkci `api/lead.ts` — tu umí spustit až Vercel. Aby šlo v lokálním náhledu otestovat celý tok formuláře (děkovná obrazovka), je ve `vite.config.ts` malý vývojářský "mock", který na `/api/lead` odpoví rovnou `{ ok: true }`, aniž by se cokoliv reálně odeslalo — v terminálu, kde běží `npm run dev`, uvidíte řádek `[DEV MOCK] /api/lead přijal poptávku`. Tenhle mock se v produkčním buildu ani po nasazení na Vercel vůbec nepoužije, tam se volá skutečná funkce z `api/lead.ts`.
 
 Pro odzkoušení SKUTEČNÉHO odesílání e-mailu (ne mocku) musíte použít `vercel dev` místo `npm run dev` — ten už serverless funkce spouští opravdově — a mít vyplněný `.env` podle sekce 4 níže:
 
@@ -58,7 +58,6 @@ src/
     validace.ts             kontrola jména/telefonu/e-mailu
     kalkulacka.ts            logika kalkulačky (posuvníky, přepočet)
     formular.ts               odeslání formuláře, honeypot, ochrana proti botům
-    gate.ts                    odemčení srovnání bank po odeslání
     analytics.ts                Meta Pixel
     consent.ts, cookie-lista.ts  cookie lišta
 api/
@@ -98,7 +97,7 @@ Sazby bank se mění a Hypoindex.cz je aktualizuje vždy kolem 5. pracovního dn
    - `"sazba_kterou_vyjednavam"` na sazbu, kterou aktuálně reálně dokážete klientům vyjednat
 5. Soubor uložte (na GitHubu tlačítkem "Commit changes"). Pokud je web nasazený na Vercelu napojeném na GitHub, změna se sama nasadí do pár minut.
 
-Nic jiného v kódu měnit nemusíte — čísla z tohoto souboru se používají všude v kalkulačce i v odemčeném srovnání bank automaticky.
+Nic jiného v kódu měnit nemusíte — čísla z tohoto souboru se používají všude v kalkulačce automaticky.
 
 **Formát souboru musí zůstat platný JSON** — každý řádek s číslem musí mít na konci čárku kromě úplně posledního v dané skupině `{ }`. Pokud si nejste jistí, nejbezpečnější je změnit vždy jen samotná čísla a nic jiného (uvozovky, dvojtečky, čárky) neposouvat.
 
@@ -125,4 +124,4 @@ Konkrétně:
 
 ## 8. Poznámka k designu
 
-Barvy, písmo (Montserrat Variable) a tvarosloví tlačítek jsou převzaté přímo ze skutečného webu janfrydl.cz, aby reklama → landing page → hlavní web působily jako od jednoho člověka. Funkční barvy (úspěch/upozornění/focus) a zlatý akcent na čísle splátky a odemčeném srovnání jsou navíc — jsou odvozené ze stejné barevné "teploty" jako hlavní značková barva.
+Barvy, písmo (Montserrat Variable) a tvarosloví tlačítek jsou převzaté přímo ze skutečného webu janfrydl.cz, aby reklama → landing page → hlavní web působily jako od jednoho člověka. Funkční barvy (úspěch/upozornění/focus) a zlatý akcent na čísle splátky jsou navíc — jsou odvozené ze stejné barevné "teploty" jako hlavní značková barva.

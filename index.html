@@ -117,7 +117,7 @@
               Spočítejte si zdarma srovnání a zjistěte, kolik můžete ušetřit.
             </h1>
             <p class="mt-4 max-w-lg text-lg text-ui-muted">
-              Porovnám vám nabídky všech bank a najdu tu nejlevnější variantu pro vaši situaci. Vy jen posunete pár posuvníků.
+              Porovnám vám nabídky všech bank a najdu tu nejvýhodnější variantu pro vaši situaci. Vy jen posunete pár posuvníků.
             </p>
             <ul class="mt-6 flex flex-col gap-2 text-sm font-medium sm:flex-row sm:flex-wrap sm:gap-6">
               <li class="flex items-center gap-2">
@@ -377,7 +377,7 @@
                 href="#krok-2"
                 class="cta-formular flex w-full items-center justify-center gap-2 rounded-none bg-brand-primary px-4 py-4 text-center text-base font-bold uppercase tracking-wide text-white shadow-card"
               >
-                Zjistit nejlevnější banku
+                Chci osobní srovnání
                 <span aria-hidden="true" class="cta-sipka text-xl leading-none">↓</span>
               </a>
               <p class="mt-2 text-center text-xs font-medium text-ui-muted">Krok 2 z 2 · zdarma · vyplnění za 10 vteřin</p>
@@ -391,8 +391,8 @@
 
             <p class="mt-4 text-xs text-ui-muted">
               Výpočet je orientační a nejde o nabídku ani příslib úvěru. Skutečnou sazbu a podmínky stanoví banka podle bonity, LTV, typu
-              nemovitosti a doplňkových produktů. Sazby v přehledu jsou minimální nabídkové sazby z veřejných sazebníků k 24. 8. 2026
-              (zdroj: Hypoindex.cz).
+              nemovitosti a doplňkových produktů. Kalkulačka počítá s minimálními nabídkovými sazbami z veřejných sazebníků k
+              <span id="sazby-datum">24. 9. 2026</span> (zdroj: Hypoindex.cz).
             </p>
           </div>
         </div>
@@ -410,10 +410,10 @@
               <div id="gate-obal" class="gate-rozmazano gate-vyska-omezena rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
                 <ul class="mb-4 flex flex-col gap-2 text-sm font-medium">
                   <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Osobní srovnání všech bank pro váš konkrétní úvěr, ne obecná čísla z internetu</li>
-                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Přesně která banka vám dá nejnižší sazbu</li>
-                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Kolik můžete orientačně ušetřit měsíčně i za celou fixaci</li>
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Ověřím u bank, kdo vám pro vaši situaci dá nejlepší podmínky</li>
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Spočítám vám, kolik reálně ušetříte měsíčně i za celou fixaci</li>
                   <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Doporučenou délku fixace podle vaší situace</li>
-                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Do 24 hodin v mailu, bez schůzky a bez závazku</li>
+                  <li class="flex items-start gap-2"><span class="text-ui-success" aria-hidden="true">✓</span> Krátce si zavoláme a srovnání vám pošlu do mailu, bez závazku</li>
                 </ul>
                 <table class="w-full text-sm">
                   <thead>
@@ -441,16 +441,13 @@
                     </tr>
                   </tbody>
                 </table>
-                <p id="gate-uspora" class="mt-4 text-sm"></p>
-                <p id="gate-fixace-doporuceni" class="mt-2 text-sm"></p>
-                <p id="gate-aktualizace" class="mt-2 text-xs text-ui-muted"></p>
               </div>
 
-              <a href="#gate-form" id="gate-zamek-overlay" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/70 text-center">
+              <a href="#gate-form-obal" id="gate-zamek-overlay" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/70 text-center">
                 <span aria-hidden="true" class="text-3xl">🔒</span>
-                <span class="max-w-xs text-sm font-bold">Odemkne se odesláním formuláře níže</span>
-                <span class="cta-formular mt-1 inline-flex items-center gap-2 rounded-none bg-brand-primary px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-card">
-                  Odemknout zdarma
+                <span class="max-w-xs text-sm font-bold">Tohle vám připravím osobně, na míru vašim číslům</span>
+                <span data-cta-formular class="cta-formular mt-1 inline-flex items-center gap-2 rounded-none bg-brand-primary px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-card">
+                  Chci srovnání na míru
                   <span aria-hidden="true" class="cta-sipka text-xl leading-none">↓</span>
                 </span>
               </a>
@@ -458,7 +455,7 @@
 
             <div class="mt-8 rounded-sm bg-brand-primary-dark p-5 text-white md:p-6">
               <p id="gate-hook-text" class="text-lg font-bold">
-                U hypoték podobných té vaší je dnes rozdíl mezi nejlevnější a nejdražší bankou klidně stovky tisíc korun na úrocích za dobu fixace.
+                Rozdíly mezi bankami umí být i u stejné hypotéky překvapivě velké.
               </p>
               <p class="mt-2 text-white/80">
                 Nevím, jestli právě nemáte tu dražší variantu. Zjistím to za vás a řeknu vám na rovinu, kde ušetříte nejvíc. Do 24 hodin,
@@ -466,7 +463,7 @@
               </p>
             </div>
 
-            <div id="gate-form-obal" class="mt-6">
+            <div id="gate-form-obal" class="mt-6 scroll-mt-20">
               <form id="gate-form" novalidate class="scroll-mt-20 rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
                 <div class="grid gap-4">
                   <div>
@@ -544,18 +541,24 @@
                     data-role="btn-odeslat"
                     class="w-full rounded-none bg-brand-primary py-3 text-base font-bold uppercase tracking-wide text-white transition hover:opacity-90 focus-visible:opacity-90"
                   >
-                    Ukázat mi nejlevnější banku
+                    Chci, abyste mi to porovnal
                   </button>
                   <p class="text-center text-xs text-ui-muted">10 vteřin vyplnění · bez schůzky · k ničemu se nezavazujete</p>
                 </div>
               </form>
 
               <div id="gate-diky" hidden class="rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
-                <h3 class="text-xl font-extrabold uppercase text-ui-success">Děkujeme, máme to!</h3>
+                <h3 class="text-xl font-extrabold uppercase text-ui-success">Děkuju, mám to!</h3>
                 <p id="gate-diky-shrnuti" class="mt-2 text-sm font-medium"></p>
                 <p class="mt-3">
-                  Ozvu se vám do 24 hodin (Po–Pá do 1 hodiny). Projdeme 10 minut vaši situaci a do dalšího dne máte v mailu srovnání bank.
+                  Vaše čísla si osobně projdu a ověřím u bank, co vám reálně nabídnou. Do 24 hodin se vám ozvu, v pracovní dny obvykle do
+                  hodiny. Krátce si zavoláme a srovnání vám pošlu do mailu.
                 </p>
+                <p class="mt-3 text-sm text-ui-muted">
+                  Veřejné sazebníky ukazují jen nejlepší možný případ. Skutečná sazba závisí na vaší situaci, a proto vám nechci posílat
+                  čísla od oka.
+                </p>
+                <p class="mt-3 font-bold">Honza Frýdl</p>
                 <a
                   href="tel:+420731444770"
                   class="mt-4 inline-flex items-center gap-2 rounded-none bg-brand-primary-dark px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90"
@@ -955,8 +958,8 @@
                 <span class="flex items-center justify-between">Jak dlouho trvá vyřízení?<span aria-hidden="true" class="ml-4 text-brand-primary group-open:rotate-45 transition">+</span></span>
               </summary>
               <p class="mt-3 text-ui-muted">
-                Od podání žádosti do vyplacení obvykle 3–6 týdnů, záleží na bance a rychlosti dodání podkladů. První srovnání bank máte v
-                mailu do 24 hodin od odeslání formuláře.
+                Od podání žádosti do vyplacení obvykle 3–6 týdnů, záleží na bance a rychlosti dodání podkladů. Do 24 hodin od odeslání
+                formuláře se vám ozvu a srovnání bank vám pošlu do mailu.
               </p>
             </details>
           </div>
@@ -1024,8 +1027,12 @@
             </form>
 
             <div id="form2-diky" hidden class="rounded-sm bg-brand-light p-5 text-center shadow-card ring-1 ring-black/5 md:p-6">
-              <h3 class="text-xl font-extrabold uppercase text-ui-success">Děkujeme, máme to!</h3>
-              <p class="mt-2">Ozvu se vám do 24 hodin (Po–Pá do 1 hodiny).</p>
+              <h3 class="text-xl font-extrabold uppercase text-ui-success">Děkuju, mám to!</h3>
+              <p class="mt-2">
+                Vaši situaci si osobně projdu a do 24 hodin se vám ozvu, v pracovní dny obvykle do hodiny. Krátce si zavoláme a srovnání
+                vám pošlu do mailu.
+              </p>
+              <p class="mt-3 font-bold">Honza Frýdl</p>
               <a href="tel:+420731444770" class="mt-4 inline-flex items-center gap-2 rounded-none bg-brand-primary-dark px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90">
                 📞 Zavolat rovnou
               </a>

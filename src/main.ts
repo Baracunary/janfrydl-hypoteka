@@ -2,13 +2,12 @@ import './style.css'
 import { inicializujUtm } from './lib/utm'
 import { inicializujAnalytiku } from './lib/analytics'
 import { inicializujKalkulacku, ziskejAktualniStav } from './lib/kalkulacka'
-import { odemkniSrovnani } from './lib/gate'
 import { inicializujFormular } from './lib/formular'
 import { inicializujStickyCta } from './lib/sticky-cta'
 import { inicializujCookieListu } from './lib/cookie-lista'
 import { inicializujAccordion } from './lib/accordion'
 import { inicializujRecenzeCarousel } from './lib/recenze-carousel'
-import { formatujKc, formatujProcenta } from './lib/hypoteka'
+import { formatujKc, formatujProcenta, sazby } from './lib/hypoteka'
 
 inicializujUtm()
 inicializujAnalytiku()
@@ -18,7 +17,12 @@ inicializujCookieListu()
 inicializujStickyCta()
 inicializujAccordion()
 
-let leadJizOdeslan = false
+// Datum sazeb v poznámce pod kalkulačkou bereme přímo ze sazby.json, ať nezastará.
+const sazbyDatum = document.getElementById('sazby-datum')
+if (sazbyDatum) {
+  const [rok, mesic, den] = sazby.aktualizovano.split('-').map(Number)
+  sazbyDatum.textContent = `${den}. ${mesic}. ${rok}`
+}
 
 function zobrazDikyStav(): void {
   const stav = ziskejAktualniStav()
@@ -38,11 +42,6 @@ function zobrazDikyStav(): void {
   document.getElementById('form2-diky')?.removeAttribute('hidden')
   // Prokliky na formulář po odeslání nedávají smysl — formuláře jsou skryté.
   document.querySelectorAll<HTMLElement>('[data-cta-formular]').forEach((cta) => (cta.hidden = true))
-
-  if (!leadJizOdeslan) {
-    leadJizOdeslan = true
-    odemkniSrovnani(stav)
-  }
 }
 
 const formGate = document.getElementById('gate-form') as HTMLFormElement | null

@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vaše video: 3 věci před koncem fixace | Jan Frýdl</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="preload" href="/fonts/montserrat-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <style>
+      body {
+        background: #fff;
+        color: #000;
+        font-family: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
+        margin: 0;
+      }
+    </style>
+
+    <script type="module" src="/src/pages/fixace-video/main.ts"></script>
+  </head>
+  <body>
+    <a href="#hlavni-obsah" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-brand-primary focus:text-white focus:px-4 focus:py-2">
+      Přeskočit na hlavní obsah
+    </a>
+
+    <!-- MINIMÁLNÍ HLAVIČKA -->
+    <header class="border-b border-black/10 bg-white">
+      <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-3 md:px-6">
+        <a href="/" class="text-base font-semibold uppercase tracking-wide">
+          <span class="text-brand-dark">Jan</span>
+          <span class="bg-brand-primary text-white px-1">Frýdl</span>
+        </a>
+        <a href="tel:+420731444770" class="inline-flex items-center gap-2 text-sm font-bold text-brand-primary">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/>
+          </svg>
+          <span>731 444 770</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="hlavni-obsah">
+
+      <!-- ====== POTVRZENÍ + URGENCE ====== -->
+      <section class="bg-brand-primary-dark py-10 text-white md:py-14">
+        <div class="mx-auto max-w-3xl px-4 text-center md:px-6">
+          <p class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold text-accent-value">
+            <span aria-hidden="true">✓</span> Přístup udělen
+          </p>
+          <h1 class="text-3xl font-extrabold leading-tight md:text-4xl">
+            Tady je vaše video:<br />
+            <span class="text-accent-value">3 věci, které musíte udělat ještě letos</span>
+          </h1>
+          <p class="mx-auto mt-4 max-w-xl text-white/80">
+            Podívejte se na video <strong class="text-white">hned teď</strong> —
+            a pak si zarezervujte bezplatný hovor, kde vám Jan připraví srovnání bank na míru.
+          </p>
+
+          <!-- Scarcity -->
+          <div class="mx-auto mt-5 max-w-sm rounded-sm border border-accent-value/40 bg-white/5 px-4 py-3">
+            <p class="text-sm font-bold text-accent-value">
+              ⏳ Počet termínů volných hovorů je omezený.
+            </p>
+            <p class="mt-1 text-xs text-white/60">Jan pracuje s omezeným počtem klientů, aby mohl každému věnovat dost času.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== VIDEO EMBED ====== -->
+      <section class="bg-brand-primary-tint py-10 md:py-14">
+        <div class="mx-auto max-w-3xl px-4 md:px-6">
+
+          <!-- Video player — responzivní 16:9 -->
+          <div class="overflow-hidden rounded-sm shadow-card ring-1 ring-black/10">
+            <!-- [DOPLNIT: VIDEO_URL] — vložte skutečné video URL níže.
+                 YouTube: nahraďte src za https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1
+                 Vimeo: nahraďte src za https://player.vimeo.com/video/VIDEO_ID
+                 Bunny: nahraďte src za vaše Bunny Stream embed URL -->
+            <div class="relative" style="padding-top: 56.25%">
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-brand-primary-dark text-white">
+                <svg aria-hidden="true" width="56" height="56" viewBox="0 0 24 24" fill="currentColor" class="opacity-40">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <p class="text-center text-sm font-bold text-white/60 px-4">
+                  [DOPLNIT: VIDEO_URL]<br />
+                  <span class="text-xs font-normal">Vložte odkaz na video (YouTube unlisted / Vimeo / Bunny)</span>
+                </p>
+              </div>
+              <!-- Odkomentujte a vyplňte URL videa až bude k dispozici:
+              <iframe
+                class="absolute inset-0 h-full w-full"
+                src="[VIDEO_URL]"
+                title="3 věci před koncem fixace hypotéky — Jan Frýdl"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              -->
+            </div>
+          </div>
+
+          <p class="mt-4 text-center text-sm text-ui-muted">
+            Video se nenačítá? <a href="tel:+420731444770" class="font-bold text-brand-primary underline">Zavolejte Janovi přímo</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====== CTA #1 — hned po videu ====== -->
+      <section class="py-10 md:py-14">
+        <div class="mx-auto max-w-2xl px-4 text-center md:px-6">
+          <h2 class="text-2xl font-extrabold uppercase md:text-3xl">
+            Chcete vědět, kolik konkrétně ušetříte?
+          </h2>
+          <p class="mx-auto mt-3 max-w-lg text-ui-muted">
+            Video ukáže princip. Osobní srovnání bank ukáže vaše konkrétní číslo.
+            Zavolejte si s Janem — <strong>zdarma, 30 minut, bez závazku</strong>.
+          </p>
+
+          <!-- Přidaná hodnota hovoru -->
+          <ul class="mx-auto mt-6 max-w-sm text-left flex flex-col gap-2 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-ui-success font-bold">✓</span>
+              <span>Projdeme vaši konkrétní hypotéku a podmínky</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-ui-success font-bold">✓</span>
+              <span>Srovnám nabídky všech bank pro vaši situaci</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-ui-success font-bold">✓</span>
+              <span>Řeknu vám na rovinu, kde a kolik ušetříte</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-ui-success font-bold">✓</span>
+              <span>Doporučení do 24 hodin, vyřizování bez pobočky</span>
+            </li>
+          </ul>
+
+          <a
+            href="#kalendar"
+            id="cta-po-videu"
+            data-cta-rezervace
+            class="mt-8 inline-flex items-center gap-3 rounded-none bg-brand-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-white shadow-card transition hover:opacity-90"
+          >
+            Rezervovat bezplatný hovor s Janem →
+          </a>
+          <p class="mt-3 text-xs text-ui-muted">Zdarma · 30 minut · bez závazku</p>
+        </div>
+      </section>
+
+      <!-- ====== RECENZE — sociální důkaz ====== -->
+      <section class="bg-brand-primary-tint py-10 md:py-14">
+        <div class="mx-auto max-w-3xl px-4 md:px-6">
+          <div class="mb-2 flex items-center gap-2">
+            <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+              <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
+              <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" />
+              <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z" />
+              <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
+            </svg>
+            <span class="text-sm font-bold">Recenze na Googlu</span>
+            <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5">
+              <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+              <p class="mt-2 text-sm text-ui-muted">„Mě osobně ušetřil bez přehánění stovky tisíc korun."</p>
+              <p class="mt-3 text-sm font-bold">Elisabeth A.</p>
+            </div>
+            <div class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5">
+              <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+              <p class="mt-2 text-sm text-ui-muted">„Mám v pana Frýdla absolutní důvěru."</p>
+              <p class="mt-3 text-sm font-bold">Mar Két</p>
+            </div>
+            <div class="rounded-sm bg-brand-light p-4 shadow-card ring-1 ring-black/5">
+              <span class="text-accent-value-text" aria-hidden="true">★★★★★</span>
+              <p class="mt-2 text-sm text-ui-muted">„Pokud to člověka nic nestojí, tak zde není co ztratit."</p>
+              <p class="mt-3 text-sm font-bold">Victor A.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== CTA #2 opakované ====== -->
+      <section class="py-10 md:py-14">
+        <div class="mx-auto max-w-2xl px-4 text-center md:px-6">
+          <p class="text-sm font-bold uppercase tracking-wider text-brand-primary">Poslední krok</p>
+          <h2 class="mt-2 text-2xl font-extrabold uppercase md:text-3xl">
+            Vyberte si termín bezplatného hovoru
+          </h2>
+          <p class="mx-auto mt-3 max-w-lg text-ui-muted">
+            Jan vám zavolá přesně v čas, který vám vyhovuje.
+            Do 24 hodin od hovoru dostanete srovnání bank na míru vašim číslům.
+          </p>
+
+          <!-- Scarcity opakovaně -->
+          <div class="mx-auto mt-4 max-w-sm rounded-sm bg-ui-warning-tint px-4 py-3">
+            <p class="text-sm font-bold text-ui-warning-text">
+              ⚠ Počet volných termínů je omezený.
+            </p>
+          </div>
+
+          <a
+            href="#kalendar"
+            data-cta-rezervace
+            class="mt-6 inline-flex items-center gap-3 rounded-none bg-brand-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-white shadow-card transition hover:opacity-90"
+          >
+            Rezervovat hovor →
+          </a>
+        </div>
+      </section>
+
+      <!-- ====== BOOKING KALENDÁŘ ====== -->
+      <section id="kalendar" class="bg-brand-primary-tint py-12 md:py-16">
+        <div class="mx-auto max-w-3xl px-4 md:px-6">
+          <h2 class="text-center text-2xl font-extrabold uppercase md:text-3xl">
+            Vyberte si termín
+          </h2>
+          <p class="mt-2 text-center text-sm text-ui-muted">Bezplatný 30minutový hovor s Janem Frýdlem</p>
+
+          <div class="mt-8 overflow-hidden rounded-sm shadow-card ring-1 ring-black/10 bg-brand-light">
+            <!--
+              Google Calendar embed:
+              URL calendar.app.google/pX6djR7KPxPxVg9m8 je přímý booking link, ne embed URL.
+              Google Calendar appointment scheduling lze embedovat přes iframe
+              pouze pokud je nastaveno sdílení. Doporučujeme:
+              1. Přejít na calendar.google.com → nastavení → "Získat kód pro vložení"
+              2. Nebo použít iframe s booking URL a fallback tlačítko níže.
+              Zatím zobrazujeme prominentní tlačítko jako primární CTA.
+            -->
+            <div class="flex flex-col items-center gap-5 p-8 text-center">
+              <div class="flex h-16 w-16 items-center justify-center rounded-full bg-brand-primary-tint">
+                <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-brand-primary">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-lg font-bold">Bezplatný hovor s Janem Frýdlem</p>
+                <p class="mt-1 text-sm text-ui-muted">30 minut · online nebo telefon · bez závazku</p>
+              </div>
+              <a
+                href="https://calendar.app.google/pX6djR7KPxPxVg9m8"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta-rezervace
+                class="inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-none bg-brand-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-white shadow-card transition hover:opacity-90"
+              >
+                Vybrat termín v kalendáři →
+              </a>
+              <p class="text-xs text-ui-muted">Otevře se v nové záložce. Výběr termínu zabere 2 minuty.</p>
+            </div>
+          </div>
+
+          <!-- Alternativa: přímý telefonát -->
+          <div class="mt-6 rounded-sm bg-brand-primary-dark p-5 text-center text-white">
+            <p class="font-bold">Raději zavoláte rovnou?</p>
+            <a
+              href="tel:+420731444770"
+              class="mt-3 inline-flex items-center gap-2 rounded-none bg-white px-6 py-3 text-sm font-bold uppercase tracking-wide text-brand-primary-dark"
+            >
+              📞 +420 731 444 770
+            </a>
+            <p class="mt-2 text-xs text-white/60">Dostupný v pracovní dny, obvykle odpoví do hodiny.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== JAN — důvěryhodnost ====== -->
+      <section class="py-10 md:py-14">
+        <div class="mx-auto max-w-2xl px-4 md:px-6">
+          <div class="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
+            <img
+              src="/img/jan-portret.webp"
+              alt="Jan Frýdl"
+              width="100"
+              height="100"
+              loading="lazy"
+              class="h-20 w-20 shrink-0 rounded-full object-cover object-top shadow-card"
+            />
+            <div>
+              <p class="text-lg font-extrabold uppercase">Jan Frýdl</p>
+              <p class="text-sm font-bold uppercase text-ui-muted">Správce majetku · finanční poradce</p>
+              <p class="mt-2 text-sm text-ui-muted">
+                Vázaný zástupce 4fin — srovnávám hypotéky napříč bankami pro klienty po celé ČR.
+                Odměnu dostávám od banky. Pro vás je srovnání zdarma.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== CTA #3 — závěrečné ====== -->
+      <section class="bg-brand-primary py-10 text-white md:py-14">
+        <div class="mx-auto max-w-2xl px-4 text-center md:px-6">
+          <h2 class="text-2xl font-extrabold uppercase md:text-3xl">
+            Neodkládejte to — každý měsíc navíc je ztracená příležitost
+          </h2>
+          <p class="mx-auto mt-3 max-w-lg text-white/80">
+            Ideální čas na srovnání bank je 4–6 měsíců před koncem fixace.
+            Čím déle čekáte, tím méně možností máte.
+          </p>
+          <a
+            href="#kalendar"
+            data-cta-rezervace
+            class="mt-6 inline-flex items-center gap-3 rounded-none bg-white px-8 py-4 text-base font-bold uppercase tracking-wide text-brand-primary shadow-card transition hover:opacity-90"
+          >
+            Rezervovat hovor zdarma →
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- PATIČKA -->
+    <footer class="bg-brand-dark py-10 text-white/80">
+      <div class="mx-auto max-w-3xl px-4 md:px-6">
+        <div class="grid gap-6 md:grid-cols-2">
+          <div>
+            <p class="font-bold uppercase text-white">Jan Frýdl</p>
+            <p class="text-sm">Správce majetku</p>
+            <ul class="mt-2 flex flex-col gap-1 text-sm">
+              <li><a href="mailto:jan.frydl@4fin.cz" class="underline">jan.frydl@4fin.cz</a></li>
+              <li><a href="tel:+420731444770" class="underline">+420 731 444 770</a></li>
+            </ul>
+          </div>
+          <div class="text-xs text-white/60">
+            <p>Jan Frýdl, IČO 19342896, se sídlem Elišky Krásnohorské 712/15, 323 00 Plzeň.</p>
+            <p class="mt-2">Vázaný zástupce společnosti 4fin Better together, a.s., IČO 06018521, Na hřebenech II 1718/10, 140 00 Praha 4.</p>
+            <p class="mt-2">Zapsán v seznamu vázaných zástupců ČNB pod IČO 19342896. Zprostředkování spotřebitelského úvěru na bydlení dle zákona č. 257/2016 Sb.</p>
+            <p class="mt-3 flex gap-4 flex-wrap">
+              <a href="/gdpr" class="underline">Ochrana osobních údajů</a>
+              <a href="/cookies" class="underline">Cookies</a>
+            </p>
+          </div>
+        </div>
+        <p class="mt-6 text-xs text-white/40">© 2026 Jan Frýdl. Všechna práva vyhrazena.</p>
+      </div>
+    </footer>
+
+    <!-- COOKIE LIŠTA -->
+    <div
+      id="cookie-lista"
+      class="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-brand-light p-4 shadow-card md:inset-x-auto md:top-auto md:bottom-4 md:left-4 md:right-auto md:max-w-md md:rounded-sm md:border"
+      role="dialog"
+      aria-label="Nastavení cookies"
+    >
+      <p class="text-sm">
+        Používáme cookies pro nezbytný chod webu. Víc v <a href="/cookies" class="underline">zásadách cookies</a>.
+      </p>
+      <div id="cookie-nastaveni" hidden class="mt-3 flex flex-col gap-2 text-sm">
+        <label class="flex items-center gap-2"><input type="checkbox" id="cookie-analytika" class="accent-brand-primary" /> Analytika</label>
+        <label class="flex items-center gap-2"><input type="checkbox" id="cookie-marketing" class="accent-brand-primary" /> Marketing (Meta Pixel)</label>
+        <button type="button" id="cookie-ulozit-nastaveni" class="mt-1 rounded-none bg-brand-primary py-2 text-sm font-bold uppercase text-white">Uložit nastavení</button>
+        <button type="button" id="cookie-jen-nezbytne" class="rounded-none border-2 border-brand-primary py-2 text-sm font-bold uppercase">Jen nezbytné</button>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <button type="button" id="cookie-nastavit" class="rounded-none border-2 border-brand-primary px-3 py-2 text-xs font-bold uppercase">Nastavit</button>
+        <button type="button" id="cookie-prijmout-vse" class="rounded-none bg-brand-primary px-3 py-2 text-xs font-bold uppercase text-white">Přijmout vše</button>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -29,6 +29,12 @@ interface LeadPayload {
   souhlas: boolean
   souhlas_cas: string
   event_id?: string
+  // Rozšíření pro nové funnely — zpětně kompatibilní, původní payload beze změn.
+  typ?: 'fixace' | 'koupe' | string
+  krok?: number
+  kdy_konci_fixace?: string
+  faze?: string
+  priorita?: 'vysoka' | 'normalni'
   kalkulacka: KalkulackaPayload
   utm: { source: string; medium: string; campaign: string; content: string; term: string }
   fbclid: string
@@ -46,8 +52,9 @@ function jePlatnyPayload(body: unknown): body is LeadPayload {
     /^\+420\d{9}$/.test(p.telefon) &&
     typeof p.email === 'string' &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email) &&
-    typeof p.situace === 'string' &&
-    p.situace.trim().length > 0 &&
+    // situace je povinná pro původní formuláře; pro nové funnely s typ='fixace'/'koupe'
+    // ji nahrazuje kombinace typ + kdy_konci_fixace/faze, takže ji akceptujeme jako volitelnou.
+    (typeof p.situace === 'string' && p.situace.trim().length > 0 || typeof p.typ === 'string') &&
     p.souhlas === true &&
     typeof p.kalkulacka === 'object' &&
     p.kalkulacka !== null
@@ -72,12 +79,17 @@ async function posliEmail(lead: LeadPayload): Promise<boolean> {
   }
 
   const k = lead.kalkulacka
+  const typLabel = lead.typ === 'fixace' ? '🔄 Fixace' : lead.typ === 'koupe' ? '🏠 Koupě' : ''
   const html = `
-    <h2>Nová poptávka z kalkulačky</h2>
+    <h2>Nová poptávka z kalkulačky${typLabel ? ` — ${typLabel}` : ''}</h2>
     <p><strong>${lead.jmeno}</strong><br/>
     Tel: <a href="tel:${lead.telefon}">${lead.telefon}</a><br/>
     E-mail: <a href="mailto:${lead.email}">${lead.email}</a><br/>
-    Řeší: ${lead.situace}</p>
+    ${lead.situace ? `Řeší: ${lead.situace}` : ''}
+    ${lead.kdy_konci_fixace ? `<br/>Kdy končí fixace: ${lead.kdy_konci_fixace}` : ''}
+    ${lead.faze ? `<br/>Fáze koupě: ${lead.faze}` : ''}
+    ${lead.krok ? `<br/>Krok funnelu: ${lead.krok}` : ''}
+    ${lead.priorita === 'vysoka' ? '<br/><strong style="color:#c0392b">⚠ VYSOKÁ PRIORITA — má podepsanou rezervaci</strong>' : ''}</p>
     <h3>Parametry z kalkulačky</h3>
     <ul>
       <li>Režim: ${k.rezim === 'koupe' ? 'Kupuje nemovitost' : 'Refinancování'}</li>

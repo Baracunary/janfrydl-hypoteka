@@ -33,7 +33,7 @@ function mockLeadApiVDevu(): Plugin {
   }
 }
 
-// Vícestránkový build: hlavní landing page + samostatné právní stránky.
+// Vícestránkový build: hlavní landing page + právní stránky + fixace funnel.
 export default defineConfig({
   plugins: [tailwindcss(), mockLeadApiVDevu()],
   // Klientské proměnné mají v projektu prefix PUBLIC_ (viz .env.example) — Vite jinak propouští jen VITE_.
@@ -44,6 +44,8 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         gdpr: resolve(__dirname, 'gdpr.html'),
         cookies: resolve(__dirname, 'cookies.html'),
+        fixace: resolve(__dirname, 'fixace.html'),
+        'fixace-video': resolve(__dirname, 'fixace/video.html'),
       },
     },
   },

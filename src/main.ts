@@ -1,4 +1,5 @@
 import './style.css'
+import { inject } from '@vercel/analytics'
 import { inicializujUtm } from './lib/utm'
 import { inicializujAnalytiku } from './lib/analytics'
 import { inicializujKalkulacku, ziskejAktualniStav } from './lib/kalkulacka'
@@ -8,6 +9,9 @@ import { inicializujCookieListu } from './lib/cookie-lista'
 import { inicializujAccordion } from './lib/accordion'
 import { inicializujRecenzeCarousel } from './lib/recenze-carousel'
 import { formatujKc, formatujProcenta, sazby } from './lib/hypoteka'
+
+// Initialize Vercel Web Analytics
+inject()
 
 inicializujUtm()
 inicializujAnalytiku()

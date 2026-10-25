@@ -51,7 +51,7 @@ function jePlatnyPayload(body: unknown): body is LeadPayload {
     typeof p.telefon === 'string' &&
     /^\+420\d{9}$/.test(p.telefon) &&
     typeof p.email === 'string' &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email) &&
+    (p.email.trim() === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email)) &&
     // situace je povinná pro původní formuláře; pro nové funnely s typ='fixace'/'koupe'
     // ji nahrazuje kombinace typ + kdy_konci_fixace/faze, takže ji akceptujeme jako volitelnou.
     (typeof p.situace === 'string' && p.situace.trim().length > 0 || typeof p.typ === 'string') &&

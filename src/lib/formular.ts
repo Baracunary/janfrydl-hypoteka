@@ -4,14 +4,18 @@
 
 import { validujJmeno, validujTelefon, validujEmail, normalizujTelefon } from './validace'
 import { ziskejUtm, ziskejFbclid } from './utm'
-import { trackInitiateCheckout, trackLead, vygenerujEventId } from './analytics'
+import { trackInitiateCheckout, trackLead, trackFormStart, vygenerujEventId } from './analytics'
 import type { KalkulackaStav } from './kalkulacka'
 
 const CAS_NACTENI = Date.now()
 const MIN_CAS_PRED_ODESLANIM_MS = 3000
 
-function pole<T extends HTMLElement = HTMLElement>(form: HTMLFormElement, nazev: string): T {
-  const nalezeny = form.querySelector<T>(`[data-pole="${nazev}"]`)
+function pole<T extends HTMLElement = HTMLElement>(form: HTMLFormElement, nazev: string): T | null {
+  return form.querySelector<T>(`[data-pole="${nazev}"]`)
+}
+
+function polePovinne<T extends HTMLElement = HTMLElement>(form: HTMLFormElement, nazev: string): T {
+  const nalezeny = pole<T>(form, nazev)
   if (!nalezeny) throw new Error(`Pole [data-pole="${nazev}"] nebylo ve formuláři nalezeno.`)
   return nalezeny
 }
@@ -24,6 +28,18 @@ function nastavChybu(form: HTMLFormElement, nazev: string, vstup: HTMLElement, z
   const chybaEl = chybovyElement(form, nazev)
   if (chybaEl) chybaEl.textContent = zprava ?? ''
   vstup.setAttribute('aria-invalid', String(Boolean(zprava)))
+}
+
+function ltvPasmo(ltv: number): string {
+  if (ltv <= 80) return 'do_80'
+  if (ltv <= 90) return '80_90'
+  return 'nad_90'
+}
+
+function uverPasmo(uver: number): string {
+  if (uver < 3_000_000) return 'do_3M'
+  if (uver <= 5_000_000) return '3_5M'
+  return 'nad_5M'
 }
 
 function sestavPayload(
@@ -40,6 +56,7 @@ function sestavPayload(
     souhlas: true,
     souhlas_cas: udaje.souhlasCas,
     event_id: eventId,
+    typ: 'koupe' as const,
     kalkulacka: {
       rezim: stav.rezim,
       cena: stav.rezim === 'koupe' ? stav.cena : 0,
@@ -52,6 +69,8 @@ function sestavPayload(
       do36: stav.do36,
       ucel: stav.rezim === 'koupe' ? stav.ucel : '',
       ltv_nad_limit: stav.ltvNadLimit,
+      ltv_pasmo: ltvPasmo(stav.ltv),
+      uver_pasmo: uverPasmo(stav.uver),
       ...(stav.refi
         ? {
             refi_soucasna_sazba: stav.refi.soucasnaSazba,
@@ -73,47 +92,53 @@ export interface VolbyFormulare {
 }
 
 export function inicializujFormular(form: HTMLFormElement, volby: VolbyFormulare): void {
-  const vstupJmeno = pole<HTMLInputElement>(form, 'jmeno')
-  const vstupTelefon = pole<HTMLInputElement>(form, 'telefon')
+  const vstupJmeno = polePovinne<HTMLInputElement>(form, 'jmeno')
+  const vstupTelefon = polePovinne<HTMLInputElement>(form, 'telefon')
+  // Email je volitelný — pole nemusí být přítomno, nebo může být s required=false
   const vstupEmail = pole<HTMLInputElement>(form, 'email')
-  const vstupSituace = pole<HTMLSelectElement>(form, 'situace')
-  const vstupSouhlas = pole<HTMLInputElement>(form, 'souhlas')
-  const vstupHoneypot = pole<HTMLInputElement>(form, 'honeypot')
+  // Situace může být hidden input s pevnou hodnotou nebo select — obojí funguje
+  const vstupSituace = pole<HTMLInputElement | HTMLSelectElement>(form, 'situace')
+  const vstupSouhlas = polePovinne<HTMLInputElement>(form, 'souhlas')
+  const vstupHoneypot = polePovinne<HTMLInputElement>(form, 'honeypot')
   const tlacitkoOdeslat = form.querySelector<HTMLButtonElement>('[data-role="btn-odeslat"]')
   if (!tlacitkoOdeslat) throw new Error('Tlačítko [data-role="btn-odeslat"] nebylo ve formuláři nalezeno.')
-  // Gate a závěrečný formulář mají různý text tlačítka — při chybě se vrátí přesně na ten původní.
   const puvodniTextTlacitka = tlacitkoOdeslat.textContent!.trim()
   const chybaObecna = form.querySelector<HTMLElement>('[data-role="chyba-obecna"]')
   const opravaEmailu = form.querySelector<HTMLButtonElement>('[data-role="oprava-emailu"]')
 
-  // Našeptávač překlepu v doméně e-mailu — reaguje hned po opuštění pole, ne až při odeslání.
-  vstupEmail.addEventListener('blur', () => {
-    if (vstupEmail.value.trim() === '') return
-    const vysledek = validujEmail(vstupEmail.value)
-    nastavChybu(form, 'email', vstupEmail, vysledek.platne ? (vysledek.chyba ?? null) : vysledek.chyba!)
+  // Sledovat první zadání do libovolného pole — form_start event (1× za session)
+  const sledovanaPole = [vstupJmeno, vstupTelefon, vstupEmail].filter(Boolean) as HTMLInputElement[]
+  sledovanaPole.forEach((vstup) => {
+    vstup.addEventListener('input', () => trackFormStart(), { once: true })
+  })
 
-    if (opravaEmailu) {
-      if (vysledek.platne && vysledek.navrh) {
-        opravaEmailu.hidden = false
-        opravaEmailu.textContent = `Použít ${vysledek.navrh}`
-        opravaEmailu.onclick = () => {
-          vstupEmail.value = vysledek.navrh!
-          nastavChybu(form, 'email', vstupEmail, null)
+  // Našeptávač překlepu v doméně e-mailu — jen pokud pole existuje
+  if (vstupEmail) {
+    vstupEmail.addEventListener('blur', () => {
+      if (vstupEmail.value.trim() === '') return
+      const vysledek = validujEmail(vstupEmail.value)
+      nastavChybu(form, 'email', vstupEmail, vysledek.platne ? (vysledek.chyba ?? null) : vysledek.chyba!)
+
+      if (opravaEmailu) {
+        if (vysledek.platne && vysledek.navrh) {
+          opravaEmailu.hidden = false
+          opravaEmailu.textContent = `Použít ${vysledek.navrh}`
+          opravaEmailu.onclick = () => {
+            vstupEmail.value = vysledek.navrh!
+            nastavChybu(form, 'email', vstupEmail, null)
+            opravaEmailu.hidden = true
+          }
+        } else {
           opravaEmailu.hidden = true
         }
-      } else {
-        opravaEmailu.hidden = true
       }
-    }
-  })
+    })
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
 
-    // Honeypot — bot pole vyplní, člověk ho nikdy nevidí. Tiše zahodíme, žádná chyba.
     if (vstupHoneypot.value.trim() !== '') return
-
-    // Time-trap — rychlejší odeslání než 3 s od načtení je skoro jistě bot.
     if (Date.now() - CAS_NACTENI < MIN_CAS_PRED_ODESLANIM_MS) return
 
     const jmeno = validujJmeno(vstupJmeno.value)
@@ -122,17 +147,29 @@ export function inicializujFormular(form: HTMLFormElement, volby: VolbyFormulare
     const telefon = validujTelefon(vstupTelefon.value)
     nastavChybu(form, 'telefon', vstupTelefon, telefon.platne ? null : telefon.chyba!)
 
-    const email = validujEmail(vstupEmail.value)
-    // U e-mailu může být "chyba" jen návrh opravy překlepu — pole zůstává platné, jen upozorníme.
-    nastavChybu(form, 'email', vstupEmail, !email.platne ? email.chyba! : email.chyba ?? null)
+    // Email je volitelný: validujeme jen pokud je zadán
+    let emailOk = true
+    if (vstupEmail) {
+      const emailHodnota = vstupEmail.value.trim()
+      if (emailHodnota !== '') {
+        const email = validujEmail(emailHodnota)
+        nastavChybu(form, 'email', vstupEmail, !email.platne ? email.chyba! : email.chyba ?? null)
+        emailOk = email.platne
+      } else {
+        nastavChybu(form, 'email', vstupEmail, null)
+      }
+    }
 
-    const situaceVyplnena = vstupSituace.value !== ''
-    nastavChybu(form, 'situace', vstupSituace, situaceVyplnena ? null : 'Vyberte prosím, co řešíte.')
+    const situaceHodnota = vstupSituace?.value ?? 'Kupuji nemovitost'
+    const situaceVyplnena = situaceHodnota !== ''
+    if (vstupSituace && vstupSituace.tagName === 'SELECT') {
+      nastavChybu(form, 'situace', vstupSituace, situaceVyplnena ? null : 'Vyberte prosím, co řešíte.')
+    }
 
     const souhlasZaskrtnut = vstupSouhlas.checked
     nastavChybu(form, 'souhlas', vstupSouhlas, souhlasZaskrtnut ? null : 'Pro odeslání je potřeba souhlas se zpracováním údajů.')
 
-    if (!jmeno.platne || !telefon.platne || !email.platne || !situaceVyplnena || !souhlasZaskrtnut) {
+    if (!jmeno.platne || !telefon.platne || !emailOk || !situaceVyplnena || !souhlasZaskrtnut) {
       form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()
       return
     }
@@ -144,16 +181,17 @@ export function inicializujFormular(form: HTMLFormElement, volby: VolbyFormulare
     if (chybaObecna) chybaObecna.hidden = true
 
     const eventId = vygenerujEventId()
+    const stav = volby.ziskejStav()
     const payload = sestavPayload(
       {
         jmeno: vstupJmeno.value.trim(),
         telefon: normalizujTelefon(vstupTelefon.value)!,
-        email: vstupEmail.value.trim(),
-        situace: vstupSituace.value,
+        email: vstupEmail?.value.trim() ?? '',
+        situace: situaceHodnota,
         souhlasCas: new Date().toISOString(),
       },
       eventId,
-      volby.ziskejStav(),
+      stav,
     )
 
     try {
@@ -165,7 +203,11 @@ export function inicializujFormular(form: HTMLFormElement, volby: VolbyFormulare
 
       if (!odpoved.ok) throw new Error(`Server vrátil ${odpoved.status}`)
 
-      trackLead(eventId)
+      trackLead(eventId, {
+        ltv_pasmo: ltvPasmo(stav.ltv),
+        uver_pasmo: uverPasmo(stav.uver),
+        fixace: stav.fixace,
+      })
       volby.onUspech(eventId)
     } catch {
       tlacitkoOdeslat.disabled = false

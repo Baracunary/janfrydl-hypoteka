@@ -15,7 +15,10 @@ import {
   type UcelUveru,
 } from './hypoteka'
 import { pripojSlider } from './slider'
-import { trackViewContent } from './analytics'
+import { trackViewContent, trackCalcStart, trackCalcResult } from './analytics'
+
+// Nastav na true až bude /fixace funnel sloučen zpět do hlavní stránky.
+const SHOW_FIXACE_MODE = false
 
 export type Rezim = 'koupe' | 'refinancovani'
 
@@ -62,11 +65,20 @@ function el<T extends HTMLElement = HTMLElement>(id: string): T {
   return nalezeny as T
 }
 
+// Volitelná verze — vrátí null místo výjimky (pro elementy závislé na SHOW_FIXACE_MODE).
+function elOpt<T extends HTMLElement = HTMLElement>(id: string): T | null {
+  return document.getElementById(id) as T | null
+}
+
 let prvniInterakce = false
+let calcResultTracked = false
+
 function oznacInterakci() {
   if (!prvniInterakce) {
     prvniInterakce = true
     trackViewContent()
+    trackCalcStart()
+    window.dispatchEvent(new CustomEvent('jf:calc-interakce'))
   }
 }
 
@@ -75,10 +87,16 @@ export function inicializujKalkulacku(): void {
   // synchronně už při inicializaci, takže prepocitej() musí mít vše připravené
   // dřív, než se poprvé zavolá (jinak by šlo o přístup k proměnné před inicializací). ---
 
-  const tabKoupe = el<HTMLButtonElement>('tab-koupe')
-  const tabRefi = el<HTMLButtonElement>('tab-refi')
+  const tabKoupe = elOpt<HTMLButtonElement>('tab-koupe')
+  const tabRefi = elOpt<HTMLButtonElement>('tab-refi')
   const panelKoupe = el('panel-koupe')
-  const panelRefi = el('panel-refi')
+  const panelRefi = elOpt('panel-refi')
+  const rezimTabs = elOpt('rezim-tabs')
+
+  // Skrýt přepínač režimů, pokud je deaktivován fixace mode
+  if (!SHOW_FIXACE_MODE && rezimTabs) {
+    rezimTabs.hidden = true
+  }
 
   const cenaSlider = el<HTMLInputElement>('cena-slider')
   const cenaInput = el<HTMLInputElement>('cena-input')
@@ -91,13 +109,14 @@ export function inicializujKalkulacku(): void {
   const ucelSelect = el<HTMLSelectElement>('ucel-select')
   const fixaceTlacitka = Array.from(document.querySelectorAll<HTMLButtonElement>('#fixace-group [data-fixace]'))
 
-  const refiZbyvaSlider = el<HTMLInputElement>('refi-zbyva-slider')
-  const refiZbyvaInput = el<HTMLInputElement>('refi-zbyva-input')
-  const refiSazbaSlider = el<HTMLInputElement>('refi-sazba-slider')
-  const refiSazbaInput = el<HTMLInputElement>('refi-sazba-input')
-  const refiDobaSlider = el<HTMLInputElement>('refi-doba-slider')
-  const refiDobaHodnota = el('refi-doba-hodnota')
-  const refiFixaceKonciSelect = el<HTMLSelectElement>('refi-fixace-konci-select')
+  // Refi elementy jsou volitelné — přítomny jen když SHOW_FIXACE_MODE=true
+  const refiZbyvaSlider = elOpt<HTMLInputElement>('refi-zbyva-slider')
+  const refiZbyvaInput = elOpt<HTMLInputElement>('refi-zbyva-input')
+  const refiSazbaSlider = elOpt<HTMLInputElement>('refi-sazba-slider')
+  const refiSazbaInput = elOpt<HTMLInputElement>('refi-sazba-input')
+  const refiDobaSlider = elOpt<HTMLInputElement>('refi-doba-slider')
+  const refiDobaHodnota = elOpt('refi-doba-hodnota')
+  const refiFixaceKonciSelect = elOpt<HTMLSelectElement>('refi-fixace-konci-select')
 
   const vysledekSplatka = el('vysledek-splatka')
   const vysledekUver = el('vysledek-uver')
@@ -105,14 +124,17 @@ export function inicializujKalkulacku(): void {
   const vysledekUroky = el('vysledek-uroky')
   const vysledekSazbaInfo = el('vysledek-sazba-info')
   const radekLtv = el('radek-ltv')
-  const radekRefi = el('radek-refi')
+  const radekRefi = elOpt('radek-refi')
   const ltvHodnota = el('ltv-hodnota')
   const ltvStav = el('ltv-stav')
   const ltvUpozorneni = el('ltv-upozorneni')
   const ltvUpozorneniText = el('ltv-upozorneni-text')
-  const refiSplatkaSoucasna = el('refi-splatka-soucasna')
-  const refiRozdil = el('refi-rozdil')
-  const gateHookText = el('gate-hook-text')
+  const refiSplatkaSoucasna = elOpt('refi-splatka-soucasna')
+  const refiRozdil = elOpt('refi-rozdil')
+  const gateHookText = elOpt('gate-hook-text')
+  // Řádek modelové úspory 0,5 p.b. — nový element v index.html
+  const usporaText = elOpt('uspora-text')
+  const radekUspora = elOpt('radek-uspora')
 
   let refiStav = {
     zbyvaDoplatit: 3_200_000,
@@ -121,15 +143,31 @@ export function inicializujKalkulacku(): void {
     kdyKonciFixace: '3-6',
   }
 
-  // Loss-aversion hák nad gate formulářem — reálné rozpětí sazeb pro aktuální
-  // úvěr a fixaci, ne slib úspory. Ukazuje se ještě PŘED odesláním formuláře,
-  // Konkrétní banku a sazbu Jan ověří osobně a pošle po odeslání formuláře.
+  // Loss-aversion hák nad gate formulářem
   function aktualizujGateHook(jistina: number, fixace: Fixace, ltv: number, roky: number) {
+    if (!gateHookText) return
     const rozpeti = jistina > 0 ? vypocitejRozpetiSazeb(sazby.banky, fixace, ltv, jistina, roky) : null
     gateHookText.textContent =
       rozpeti && rozpeti.rozdilZaFixaci > 0
         ? `Podle veřejných sazebníků je u úvěru ${formatujKc(jistina)} rozdíl mezi nejlevnější a nejdražší bankou až ${formatujKc(rozpeti.rozdilZaFixaci)} na úrocích za dobu ${fixace}leté fixace.`
         : `Rozdíly mezi bankami umí být i u stejné hypotéky překvapivě velké.`
+  }
+
+  // Modelová úspora při rozdílu 0,5 p.b. — zobrazí se pod výsledkem splátky
+  function aktualizujUsporuRadek(jistina: number, sazba: number, roky: number, fixace: Fixace) {
+    if (!usporaText || !radekUspora) return
+    if (jistina <= 0) {
+      radekUspora.hidden = true
+      return
+    }
+    const sazbaVyssi = sazba + 0.5
+    const { splatka: splatkaBase } = vypocitejAnuitu(jistina, sazba, roky)
+    const { splatka: splatkaBanka } = vypocitejAnuitu(jistina, sazbaVyssi, roky)
+    const rozdilMesicne = Math.round(splatkaBanka - splatkaBase)
+    const rozdilZaFixaci = Math.round(rozdilMesicne * fixace * 12)
+    radekUspora.hidden = false
+    usporaText.textContent =
+      `U běžné nabídky banky bývá sazba vyšší. Rozdíl 0,5 p. b. u vašeho úvěru dělá cca ${formatujKc(rozdilMesicne)} měsíčně a ${formatujKc(rozdilZaFixaci)} za celou fixaci. (modelový výpočet)`
   }
 
   // --- Přepočet + render výsledku ---
@@ -152,7 +190,7 @@ export function inicializujKalkulacku(): void {
       vysledekSazbaInfo.textContent = `orientačně při sazbě ${formatujProcenta(sazba, 2)} p.a. (${aktualniStav.fixace}letá fixace)`
 
       radekLtv.hidden = false
-      radekRefi.hidden = true
+      if (radekRefi) radekRefi.hidden = true
 
       ltvHodnota.textContent = formatujProcenta(ltv, 0)
       const vLimitu = ltv <= limit
@@ -169,6 +207,7 @@ export function inicializujKalkulacku(): void {
       }
 
       aktualizujGateHook(jistina, aktualniStav.fixace, ltv, aktualniStav.roky)
+      aktualizujUsporuRadek(jistina, sazba, aktualniStav.roky, aktualniStav.fixace)
     } else {
       const jistina = refiStav.zbyvaDoplatit
       const soucasna = vypocitejAnuitu(jistina, refiStav.soucasnaSazba, refiStav.zbyvajiciDoba)
@@ -190,19 +229,31 @@ export function inicializujKalkulacku(): void {
       vysledekSazbaInfo.textContent = `orientačně při sazbě ${formatujProcenta(noveSazba, 2)} p.a. (3letá fixace)`
 
       radekLtv.hidden = true
-      radekRefi.hidden = false
+      if (radekRefi) radekRefi.hidden = false
       ltvUpozorneni.hidden = true
 
-      refiSplatkaSoucasna.textContent = `${formatujKc(soucasna.splatka)} / měsíc při současné sazbě ${formatujProcenta(refiStav.soucasnaSazba, 2)}`
-      const rozdil = soucasna.splatka - nova.splatka
-      refiRozdil.textContent =
-        rozdil > 0
-          ? `Nová sazba by mohla splátku snížit o ${formatujKc(rozdil)} / měsíc.`
-          : `Nová tržní sazba je aktuálně vyšší, o ${formatujKc(Math.abs(rozdil))} / měsíc. Přesto se vyplatí srovnat všechny banky, ne jen tu vaši současnou.`
+      if (refiSplatkaSoucasna)
+        refiSplatkaSoucasna.textContent = `${formatujKc(soucasna.splatka)} / měsíc při současné sazbě ${formatujProcenta(refiStav.soucasnaSazba, 2)}`
+      if (refiRozdil) {
+        const rozdil = soucasna.splatka - nova.splatka
+        refiRozdil.textContent =
+          rozdil > 0
+            ? `Nová sazba by mohla splátku snížit o ${formatujKc(rozdil)} / měsíc.`
+            : `Nová tržní sazba je aktuálně vyšší, o ${formatujKc(Math.abs(rozdil))} / měsíc. Přesto se vyplatí srovnat všechny banky, ne jen tu vaši současnou.`
+      }
 
-      // Pro refinancování nemáme LTV z kalkulačky (nezadává se cena nemovitosti) —
-      // použijeme 80 %.
       aktualizujGateHook(jistina, 3, 80, refiStav.zbyvajiciDoba)
+      if (radekUspora) radekUspora.hidden = true
+    }
+
+    // calc_result: odeslat jednou po první uživatelské interakci
+    if (prvniInterakce && !calcResultTracked) {
+      calcResultTracked = true
+      trackCalcResult({
+        ltv_pasmo: aktualniStav.ltv <= 80 ? 'do_80' : aktualniStav.ltv <= 90 ? '80_90' : 'nad_90',
+        uver_pasmo: aktualniStav.uver < 3_000_000 ? 'do_3M' : aktualniStav.uver <= 5_000_000 ? '3_5M' : 'nad_5M',
+        fixace: aktualniStav.fixace,
+      })
     }
   }
 
@@ -211,14 +262,14 @@ export function inicializujKalkulacku(): void {
     aktualniStav.rezim = rezim
     const jeKoupe = rezim === 'koupe'
     panelKoupe.hidden = !jeKoupe
-    panelRefi.hidden = jeKoupe
-    tabKoupe.setAttribute('aria-selected', String(jeKoupe))
-    tabRefi.setAttribute('aria-selected', String(!jeKoupe))
+    if (panelRefi) panelRefi.hidden = jeKoupe
+    if (tabKoupe) tabKoupe.setAttribute('aria-selected', String(jeKoupe))
+    if (tabRefi) tabRefi.setAttribute('aria-selected', String(!jeKoupe))
     prepocitej()
   }
 
-  tabKoupe.addEventListener('click', () => nastavRezim('koupe'))
-  tabRefi.addEventListener('click', () => nastavRezim('refinancovani'))
+  if (tabKoupe) tabKoupe.addEventListener('click', () => nastavRezim('koupe'))
+  if (tabRefi) tabRefi.addEventListener('click', () => nastavRezim('refinancovani'))
 
   // --- Pole: koupě nemovitosti ---
   function maxZdroje(): number {
@@ -299,47 +350,55 @@ export function inicializujKalkulacku(): void {
     prepocitej()
   })
 
-  // --- Pole: refinancování ---
-  pripojSlider({
-    input: refiZbyvaSlider,
-    vstupCislo: refiZbyvaInput,
-    pocatecniHodnota: refiStav.zbyvaDoplatit,
-    formatujValuetext: (v) => `${formatujCislo(v)} korun`,
-    onZmena: (v) => {
-      refiStav.zbyvaDoplatit = v
-      oznacInterakci()
-      prepocitej()
-    },
-  })
+  // --- Pole: refinancování (jen pokud jsou přítomna v DOM) ---
+  if (refiZbyvaSlider && refiZbyvaInput) {
+    pripojSlider({
+      input: refiZbyvaSlider,
+      vstupCislo: refiZbyvaInput,
+      pocatecniHodnota: refiStav.zbyvaDoplatit,
+      formatujValuetext: (v) => `${formatujCislo(v)} korun`,
+      onZmena: (v) => {
+        refiStav.zbyvaDoplatit = v
+        oznacInterakci()
+        prepocitej()
+      },
+    })
+  }
 
-  pripojSlider({
-    input: refiSazbaSlider,
-    vstupCislo: refiSazbaInput,
-    pocatecniHodnota: refiStav.soucasnaSazba,
-    formatujValuetext: (v) => formatujProcenta(v, 2),
-    onZmena: (v) => {
-      refiStav.soucasnaSazba = v
-      oznacInterakci()
-      prepocitej()
-    },
-  })
+  if (refiSazbaSlider && refiSazbaInput) {
+    pripojSlider({
+      input: refiSazbaSlider,
+      vstupCislo: refiSazbaInput,
+      pocatecniHodnota: refiStav.soucasnaSazba,
+      formatujValuetext: (v) => formatujProcenta(v, 2),
+      onZmena: (v) => {
+        refiStav.soucasnaSazba = v
+        oznacInterakci()
+        prepocitej()
+      },
+    })
+  }
 
-  pripojSlider({
-    input: refiDobaSlider,
-    pocatecniHodnota: refiStav.zbyvajiciDoba,
-    formatujValuetext: (v) => `${v} let`,
-    onZmena: (v) => {
-      refiStav.zbyvajiciDoba = v
-      refiDobaHodnota.textContent = `${v} let`
-      oznacInterakci()
-      prepocitej()
-    },
-  })
+  if (refiDobaSlider && refiDobaHodnota) {
+    pripojSlider({
+      input: refiDobaSlider,
+      pocatecniHodnota: refiStav.zbyvajiciDoba,
+      formatujValuetext: (v) => `${v} let`,
+      onZmena: (v) => {
+        refiStav.zbyvajiciDoba = v
+        refiDobaHodnota.textContent = `${v} let`
+        oznacInterakci()
+        prepocitej()
+      },
+    })
+  }
 
-  refiFixaceKonciSelect.addEventListener('change', () => {
-    refiStav.kdyKonciFixace = refiFixaceKonciSelect.value
-    prepocitej()
-  })
+  if (refiFixaceKonciSelect) {
+    refiFixaceKonciSelect.addEventListener('change', () => {
+      refiStav.kdyKonciFixace = refiFixaceKonciSelect.value
+      prepocitej()
+    })
+  }
 
   nastavRezim('koupe')
   nastavFixaci(3)

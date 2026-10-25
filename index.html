@@ -330,13 +330,22 @@
                 <p id="uspora-text"></p>
               </div>
 
-              <!-- Teaser příručky — zobrazí se po prvním výpočtu -->
-              <div id="prirucka-teaser" hidden class="mt-3 flex items-center gap-3 rounded-sm border border-brand-primary/30 bg-brand-primary-tint px-3 py-2">
-                <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded bg-brand-primary text-white text-lg font-black" aria-hidden="true">7</div>
-                <p class="text-xs text-ui-muted leading-snug">
-                  <strong class="text-brand-primary-dark">Zdarma po odeslání:</strong> animace 7 chyb (70 s) + checklist dokumentů do banky
-                </p>
-              </div>
+              <!-- CTA příručky — zobrazí se po prvním výpočtu -->
+              <a
+                id="prirucka-teaser"
+                href="/pruvodce"
+                hidden
+                class="mt-4 flex items-center gap-3 rounded-sm bg-brand-primary-dark px-4 py-3 text-white no-underline hover:opacity-90 transition"
+                aria-label="Otevřít příručku: 7 chyb, které prodražují hypotéku"
+              >
+                <div class="shrink-0 flex h-12 w-12 items-center justify-center rounded bg-brand-primary text-white text-2xl font-black leading-none" aria-hidden="true">7</div>
+                <div class="min-w-0 flex-1">
+                  <p class="text-xs font-bold uppercase tracking-wide text-white/70">Zdarma pro vás</p>
+                  <p class="text-sm font-extrabold leading-tight">7 chyb, které prodražují hypotéku</p>
+                  <p class="mt-0.5 text-xs text-white/70">Animace 70 s + checklist dokumentů do banky</p>
+                </div>
+                <span class="shrink-0 text-xl font-bold text-brand-primary" aria-hidden="true">→</span>
+              </a>
 
               <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
                 <div class="col-span-2">

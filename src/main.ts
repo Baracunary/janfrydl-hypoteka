@@ -56,16 +56,6 @@ document.querySelectorAll<HTMLInputElement>('form input, form select').forEach((
   )
 })
 
-// Teaser příručky — ukáž po prvním výpočtu
-document.addEventListener(
-  'jf:calc-interakce',
-  () => {
-    const teaser = document.getElementById('prirucka-teaser')
-    if (teaser) teaser.hidden = false
-  },
-  { once: true },
-)
-
 // sticky CTA: po výpočtu přepnout popisek na "Chci porovnat banky"
 // (logika zobrazení samotné lišty zůstává v sticky-cta.ts)
 const stickyCta = document.getElementById('sticky-cta')

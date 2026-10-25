@@ -330,6 +330,14 @@
                 <p id="uspora-text"></p>
               </div>
 
+              <!-- Teaser příručky — zobrazí se po prvním výpočtu -->
+              <div id="prirucka-teaser" hidden class="mt-3 flex items-center gap-3 rounded-sm border border-brand-primary/30 bg-brand-primary-tint px-3 py-2">
+                <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded bg-brand-primary text-white text-lg font-black" aria-hidden="true">7</div>
+                <p class="text-xs text-ui-muted leading-snug">
+                  <strong class="text-brand-primary-dark">Zdarma po odeslání:</strong> animace 7 chyb (70 s) + checklist dokumentů do banky
+                </p>
+              </div>
+
               <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
                 <div class="col-span-2">
                   <dt class="text-ui-muted">Výše úvěru</dt>
@@ -463,32 +471,30 @@
                   >
                     Chci porovnat banky zdarma
                   </button>
-                  <p class="text-center text-xs text-ui-muted">Zavolám vám do 24 hodin, bez závazku.</p>
+                  <p class="text-center text-xs text-ui-muted">Zavolám vám do 24 hodin. Žádný spam, ozvu se jen k vašemu výpočtu.</p>
                 </form>
 
                 <!-- Stav po úspěšném odeslání -->
                 <div id="gate-diky" hidden class="rounded-sm bg-brand-light p-5 text-center shadow-card ring-1 ring-black/5 md:p-6">
                   <span class="text-3xl" aria-hidden="true">✓</span>
-                  <h3 class="mt-2 text-xl font-extrabold uppercase text-ui-success">Děkuju, mám to!</h3>
-                  <p id="gate-diky-shrnuti" class="mt-2 text-sm font-medium text-ui-muted"></p>
-                  <p class="mt-3">
-                    Vaše čísla si osobně projdu a ověřím u bank, co vám reálně nabídnou. Do 24 hodin se vám ozvu, v pracovní dny obvykle do hodiny. Krátce si zavoláme a srovnání vám pošlu do mailu.
-                  </p>
-                  <p class="mt-3 font-bold">Honza Frýdl</p>
-                  <div class="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                  <h3 class="mt-2 text-xl font-extrabold uppercase text-ui-success">Hotovo, děkuji.</h3>
+                  <p class="mt-2">Ozvu se vám na uvedené číslo do 24 hodin.</p>
+                  <p id="gate-diky-shrnuti" class="mt-1 text-sm font-medium text-ui-muted"></p>
+                  <a
+                    href="/pruvodce"
+                    class="mt-5 flex w-full items-center justify-center gap-2 rounded-none bg-brand-primary py-4 text-base font-bold uppercase tracking-wide text-white hover:opacity-90"
+                  >
+                    <span class="text-xl" aria-hidden="true">▶</span>
+                    Spustit příručku: 7 chyb, které prodražují hypotéku
+                  </a>
+                  <div class="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
                     <a
                       href="https://calendar.app.google/pX6djR7KPxPxVg9m8"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center gap-2 rounded-none bg-brand-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90"
+                      class="inline-flex items-center gap-2 rounded-none border-2 border-brand-primary px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-brand-primary hover:bg-brand-primary hover:text-white transition"
                     >
-                      📅 Rezervovat termín hovoru
-                    </a>
-                    <a
-                      href="tel:+420731444770"
-                      class="inline-flex items-center gap-2 rounded-none bg-brand-primary-dark px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90"
-                    >
-                      📞 Zavolat rovnou
+                      Rezervovat termín hovoru
                     </a>
                   </div>
                 </div>
@@ -800,21 +806,21 @@
                 <button type="submit" data-role="btn-odeslat" class="w-full rounded-none bg-brand-primary py-4 text-base font-bold uppercase tracking-wide text-white transition hover:opacity-90 focus-visible:opacity-90">
                   Chci porovnat banky zdarma
                 </button>
-                <p class="text-center text-xs text-ui-muted">Zavolám vám do 24 hodin, bez závazku.</p>
+                <p class="text-center text-xs text-ui-muted">Zavolám vám do 24 hodin. Žádný spam, ozvu se jen k vašemu výpočtu.</p>
               </div>
             </form>
 
             <div id="form2-diky" hidden class="rounded-sm bg-brand-light p-5 text-center shadow-card ring-1 ring-black/5 md:p-6">
               <span class="text-3xl" aria-hidden="true">✓</span>
-              <h3 class="mt-2 text-xl font-extrabold uppercase text-ui-success">Děkuju, mám to!</h3>
-              <p class="mt-2">Vaši situaci si osobně projdu a do 24 hodin se vám ozvu, v pracovní dny obvykle do hodiny.</p>
-              <p class="mt-3 font-bold">Honza Frýdl</p>
-              <div class="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                <a href="https://calendar.app.google/pX6djR7KPxPxVg9m8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-none bg-brand-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90">
-                  📅 Rezervovat termín hovoru
-                </a>
-                <a href="tel:+420731444770" class="inline-flex items-center gap-2 rounded-none bg-brand-primary-dark px-6 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90">
-                  📞 Zavolat rovnou
+              <h3 class="mt-2 text-xl font-extrabold uppercase text-ui-success">Hotovo, děkuji.</h3>
+              <p class="mt-2">Ozvu se vám na uvedené číslo do 24 hodin.</p>
+              <a href="/pruvodce" class="mt-5 flex w-full items-center justify-center gap-2 rounded-none bg-brand-primary py-4 text-base font-bold uppercase tracking-wide text-white hover:opacity-90">
+                <span class="text-xl" aria-hidden="true">▶</span>
+                Spustit příručku: 7 chyb, které prodražují hypotéku
+              </a>
+              <div class="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
+                <a href="https://calendar.app.google/pX6djR7KPxPxVg9m8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-none border-2 border-brand-primary px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-brand-primary hover:bg-brand-primary hover:text-white transition">
+                  Rezervovat termín hovoru
                 </a>
               </div>
             </div>

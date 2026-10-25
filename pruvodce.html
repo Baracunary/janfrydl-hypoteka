@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>7 chyb, které prodražují hypotéku | Jan Frýdl</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://zkontrolujhypoteku.cz/pruvodce" />
+
+    <link rel="preload" href="/fonts/montserrat-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <style>
+      body { background:#fff; color:#000; font-family:'Montserrat Variable',ui-sans-serif,system-ui,sans-serif; margin:0; }
+
+      /* ── Přehrávač ─────────────────────────────────────────────── */
+      .prehr-root {
+        position: relative;
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+        aspect-ratio: 9/16;
+        background: #4d0a21;
+        border-radius: 8px;
+        overflow: hidden;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        font-family: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
+        color: #fff;
+      }
+
+      .prehr-progress-bar {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        z-index: 10;
+        display: flex;
+        gap: 3px;
+        pointer-events: none;
+      }
+      .prehr-seg {
+        flex: 1;
+        height: 3px;
+        background: rgba(255,255,255,0.3);
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+      }
+      .prehr-seg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        width: var(--seg-progress, 0%);
+        transition: none;
+      }
+      .prehr-seg-done::after { width: 100%; }
+
+      .prehr-scene-area {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .prehr-spustit-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(77,10,33,0.85);
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .prehr-spustit-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .prehr-spustit-inner svg {
+        width: 56px;
+        height: 56px;
+        background: #b11f53;
+        border-radius: 50%;
+        padding: 12px;
+      }
+
+      .prehr-scene-content {
+        flex: 1;
+        overflow: hidden;
+      }
+
+      .prehr-scene {
+        height: 100%;
+        padding: 36px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-sizing: border-box;
+      }
+
+      .prehr-scene-title {
+        font-size: clamp(18px, 5.5vw, 26px);
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
+        color: #fff;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+      }
+
+      .prehr-caption {
+        padding: 8px 14px;
+        background: rgba(0,0,0,0.6);
+        font-size: 13px;
+        line-height: 1.55;
+        color: #fff;
+        min-height: 52px;
+      }
+
+      .prehr-tap-left, .prehr-tap-right {
+        position: absolute;
+        top: 30px;
+        bottom: 60px;
+        width: 40%;
+        cursor: pointer;
+      }
+      .prehr-tap-left { left: 0; }
+      .prehr-tap-right { right: 0; }
+
+      .prehr-controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 44px;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+      }
+      .prehr-ctrl-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        padding: 6px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+      }
+      .prehr-ctrl-btn:hover { background: rgba(255,255,255,0.15); }
+      .prehr-ctrl-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+      .prehr-scene-indicator {
+        margin-left: auto;
+        font-size: 12px;
+        color: rgba(255,255,255,0.7);
+        font-weight: 600;
+      }
+
+      /* ── Scény — vizuály ─────────────────────────────────────────── */
+
+      /* S0: Kalendář + částka */
+      .prehr-vizual-s0 { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+      .prehr-calendar { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; width: 100%; max-width: 260px; }
+      .prehr-cal-header { text-align: center; font-weight: 800; font-size: 16px; margin-bottom: 8px; }
+      .prehr-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+      .prehr-cal-den { font-size: 10px; text-align: center; padding: 2px 0; border-radius: 2px; }
+      .prehr-cal-den-done { background: #b11f53; color: #fff; }
+      .prehr-castka-obal { text-align: center; }
+      .prehr-castka-label { font-size: 11px; color: rgba(255,255,255,0.7); display: block; margin-bottom: 4px; }
+      .prehr-castka { font-size: clamp(22px, 7vw, 32px); font-weight: 900; color: #b8862b; display: block; }
+      .prehr-castka-pozn { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 4px; display: block; }
+      @keyframes prehr-castka-in { from { opacity:0; transform: scale(0.7); } to { opacity:1; transform: scale(1); } }
+      .prehr-scene-animated .prehr-castka { animation: prehr-castka-in 0.5s ease 1.5s both; }
+
+      /* S1: Banky */
+      .prehr-vizual-s1 { display: flex; flex-direction: column; gap: 10px; }
+      .prehr-banky { display: flex; gap: 6px; justify-content: center; }
+      .prehr-banka { flex: 1; background: rgba(255,255,255,0.1); border-radius: 6px; padding: 10px 6px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+      .prehr-banka-best { background: rgba(177,31,83,0.7); border: 2px solid #b11f53; }
+      .prehr-banka-label { font-size: 10px; color: rgba(255,255,255,0.7); font-weight: 700; }
+      .prehr-banka-sazba { font-size: clamp(16px, 4.5vw, 22px); font-weight: 900; color: #fff; }
+      .prehr-banka-splatka { font-size: 10px; color: rgba(255,255,255,0.8); }
+      .prehr-banka-best .prehr-banka-sazba { color: #b8862b; }
+      .prehr-rozdil-badge { background: #b8862b; color: #fff; font-weight: 900; font-size: 15px; text-align: center; border-radius: 4px; padding: 8px; letter-spacing: -0.01em; }
+      @keyframes prehr-badge-in { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
+      .prehr-scene-animated .prehr-rozdil-badge { animation: prehr-badge-in 0.4s ease 1.2s both; }
+
+      /* S2: Sazba + poplatky */
+      .prehr-vizual-s2 { display: flex; flex-direction: column; gap: 12px; }
+      .prehr-sazba-hero { font-size: clamp(44px, 13vw, 68px); font-weight: 900; color: #b8862b; line-height: 1; }
+      .prehr-poplatky { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+      .prehr-poplatek { background: rgba(255,255,255,0.1); border-radius: 4px; padding: 7px 10px; font-size: 12px; font-weight: 600; }
+      .prehr-poplatek-real { background: rgba(177,31,83,0.5); border-left: 3px solid #b11f53; font-weight: 800; }
+      @keyframes prehr-item-in { from { opacity:0; transform: translateX(-10px); } to { opacity:1; transform: translateX(0); } }
+      .prehr-scene-animated .prehr-poplatek-1 { animation: prehr-item-in 0.35s ease 0.5s both; }
+      .prehr-scene-animated .prehr-poplatek-2 { animation: prehr-item-in 0.35s ease 1.1s both; }
+      .prehr-scene-animated .prehr-poplatek-3 { animation: prehr-item-in 0.35s ease 1.7s both; }
+      .prehr-scene-animated .prehr-poplatek-4 { animation: prehr-item-in 0.35s ease 2.3s both; }
+
+      /* S3: Fixace */
+      .prehr-vizual-s3 { display: flex; flex-direction: column; gap: 16px; }
+      .prehr-fixace-os { position: relative; padding: 20px 0 30px; }
+      .prehr-fixace-linka { position: absolute; top: 32px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,0.3); }
+      .prehr-fixace-body { display: flex; justify-content: space-between; padding: 0 4%; position: relative; }
+      .prehr-fixace-bod { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .prehr-fbd-label { background: rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 8px; font-size: 11px; font-weight: 800; }
+      .prehr-fbd-sublabel { font-size: 9px; color: rgba(255,255,255,0.6); text-align: center; line-height: 1.3; }
+      .prehr-fbd-3 .prehr-fbd-label { background: #b11f53; }
+      .prehr-fixace-cursor { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 14px; color: #b8862b; }
+      @keyframes prehr-cursor-bounce { 0%,100% { left: 15%; } 40% { left: 50%; } 80% { left: 83%; } }
+      .prehr-scene-animated .prehr-fixace-cursor { animation: prehr-cursor-bounce 3s ease-in-out infinite; }
+      .prehr-fixace-pozn { font-size: 11px; color: rgba(255,255,255,0.6); text-align: center; }
+
+      /* S4: Kalendář měsíce */
+      .prehr-vizual-s4 { display: flex; flex-direction: column; gap: 10px; }
+      .prehr-kalendar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+      .prehr-mesic { background: rgba(255,255,255,0.1); border-radius: 4px; padding: 8px 4px; text-align: center; font-size: 11px; font-weight: 700; }
+      .prehr-mesic-ok { background: #1f7a4d; font-weight: 900; }
+      .prehr-mesic-pozde { opacity: 0.35; }
+      .prehr-kal-legenda { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.8); }
+      .prehr-kal-ok-dot { width: 10px; height: 10px; background: #1f7a4d; border-radius: 2px; flex-shrink: 0; }
+
+      /* S5: Náklady */
+      .prehr-vizual-s5 { display: flex; align-items: center; justify-content: center; flex: 1; }
+      .prehr-naklady-obal { position: relative; width: 190px; height: 190px; }
+      .prehr-naklady-centrum { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #b11f53; border-radius: 50%; width: 90px; height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 2; }
+      .prehr-naklady-label { font-size: 9px; color: rgba(255,255,255,0.8); font-weight: 700; }
+      .prehr-naklady-hodnota { font-size: 12px; font-weight: 900; }
+      .prehr-naklady-ikona { position: absolute; background: rgba(255,255,255,0.1); border-radius: 8px; width: 56px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 8px; font-weight: 700; text-align: center; }
+      .prehr-ni-1 { top: 0; left: 0; }
+      .prehr-ni-2 { top: 0; right: 0; }
+      .prehr-ni-3 { bottom: 0; left: 0; }
+      .prehr-ni-4 { bottom: 0; right: 0; }
+      @keyframes prehr-icon-pop { from { opacity:0; transform: scale(0); } to { opacity:1; transform: scale(1); } }
+      .prehr-scene-animated .prehr-ni-1 { animation: prehr-icon-pop 0.3s ease 0.4s both; }
+      .prehr-scene-animated .prehr-ni-2 { animation: prehr-icon-pop 0.3s ease 0.9s both; }
+      .prehr-scene-animated .prehr-ni-3 { animation: prehr-icon-pop 0.3s ease 1.4s both; }
+      .prehr-scene-animated .prehr-ni-4 { animation: prehr-icon-pop 0.3s ease 1.9s both; }
+
+      /* S6: Kreditní karta */
+      .prehr-vizual-s6 { display: flex; flex-direction: column; gap: 14px; }
+      .prehr-karta { background: linear-gradient(135deg, #b11f53, #4d0a21); border-radius: 12px; padding: 16px; }
+      .prehr-karta-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+      .prehr-karta-chip { width: 28px; height: 20px; background: #b8862b; border-radius: 3px; }
+      .prehr-karta-label { font-size: 12px; font-weight: 700; }
+      .prehr-karta-limit { font-size: 13px; }
+      .prehr-karta-note { font-size: 10px; color: rgba(255,255,255,0.6); }
+      .prehr-bonita-obal { display: flex; flex-direction: column; gap: 6px; }
+      .prehr-bonita-label { font-size: 12px; font-weight: 700; }
+      .prehr-bonita-bar { height: 12px; background: rgba(255,255,255,0.15); border-radius: 6px; overflow: hidden; }
+      .prehr-bonita-fill { height: 100%; width: 80%; background: #1f7a4d; border-radius: 6px; }
+      @keyframes prehr-bonita-down { from { width: 80%; background: #1f7a4d; } to { width: 40%; background: #b11f53; } }
+      .prehr-scene-animated .prehr-bonita-fill { animation: prehr-bonita-down 2s ease 1s both; }
+      .prehr-bonita-note { font-size: 10px; color: rgba(255,255,255,0.6); }
+
+      /* S7: Dům */
+      .prehr-vizual-s7 { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+      .prehr-dum-obal { position: relative; display: flex; align-items: center; justify-content: center; }
+      .prehr-dum-svg { width: 140px; height: 140px; color: rgba(255,255,255,0.6); }
+      .prehr-dum-fill { fill: #b11f53; }
+      @keyframes prehr-dum-fill-anim { from { y: 110px; height: 0; } to { y: 88px; height: 22px; } }
+      .prehr-scene-animated .prehr-dum-fill { animation: prehr-dum-fill-anim 2s ease 0.5s both; }
+      .prehr-dum-pct { position: absolute; bottom: 18px; font-size: 28px; font-weight: 900; color: #b8862b; }
+      .prehr-dum-pozn { font-size: 11px; color: rgba(255,255,255,0.7); text-align: center; }
+
+      /* S8: Dokumenty */
+      .prehr-vizual-s8 { display: flex; flex-direction: column; gap: 6px; }
+      .prehr-doklady { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+      .prehr-dokl { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; padding: 7px 10px; font-size: 12px; }
+      .prehr-dokl-check { color: #1f7a4d; font-size: 14px; font-weight: 900; opacity: 0; }
+      @keyframes prehr-check-in { from { opacity:0; } to { opacity:1; } }
+      .prehr-scene-animated .prehr-dokl-0 .prehr-dokl-check { animation: prehr-check-in 0.2s ease 0.5s both; }
+      .prehr-scene-animated .prehr-dokl-1 .prehr-dokl-check { animation: prehr-check-in 0.2s ease 1.4s both; }
+      .prehr-scene-animated .prehr-dokl-2 .prehr-dokl-check { animation: prehr-check-in 0.2s ease 2.3s both; }
+      .prehr-scene-animated .prehr-dokl-3 .prehr-dokl-check { animation: prehr-check-in 0.2s ease 3.2s both; }
+      .prehr-scene-animated .prehr-dokl-4 .prehr-dokl-check { animation: prehr-check-in 0.2s ease 4.1s both; }
+
+      /* S9: Logo */
+      .prehr-vizual-s9 { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; flex: 1; padding: 20px; }
+      .prehr-logo-blok { display: flex; flex-direction: column; gap: 4px; }
+      .prehr-logo-jmeno { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
+      .prehr-logo-titul { font-size: 11px; color: rgba(255,255,255,0.7); font-weight: 600; }
+      .prehr-s9-btn { display: block; background: #b11f53; color: #fff; font-size: 12px; font-weight: 800; text-transform: uppercase; padding: 10px 16px; border-radius: 4px; text-decoration: none; }
+      .prehr-s9-btn-sec { background: rgba(255,255,255,0.1); margin-top: -4px; }
+
+      /* ── Print ─────────────────────────────────────────────────── */
+      @media print {
+        .pruvodce-prehravac-obal,
+        .pruvodce-header,
+        header,
+        .prehr-root,
+        #btn-tisk,
+        .btn-rezervovat-print,
+        #cookie-lista { display: none !important; }
+        body { font-size: 11pt; color: #000; }
+        .pruvodce-chyba { break-inside: avoid; page-break-inside: avoid; }
+        a { color: #000; text-decoration: none; }
+      }
+    </style>
+
+    <script type="module" src="/src/pruvodce.ts"></script>
+  </head>
+  <body>
+    <a href="#hlavni-obsah" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-brand-primary focus:text-white focus:px-4 focus:py-2">
+      Přeskočit na hlavní obsah
+    </a>
+
+    <header class="pruvodce-header sticky top-0 z-30 bg-brand-light shadow-card">
+      <div class="mx-auto flex max-w-screen-lg items-center justify-between gap-3 px-4 py-3 md:px-6">
+        <a href="/" class="text-xl font-semibold uppercase tracking-wide">
+          <span class="text-brand-dark">Jan</span>
+          <span class="bg-brand-primary text-white px-1">Frýdl</span>
+        </a>
+        <a href="tel:+420731444770" class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-brand-primary" aria-label="Zavolat Janu Frýdlovi">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/>
+          </svg>
+          731 444 770
+        </a>
+      </div>
+    </header>
+
+    <main id="hlavni-obsah" class="mx-auto max-w-screen-lg px-4 py-8 md:px-6 md:py-12">
+
+      <p class="mb-2 text-xs text-ui-muted">
+        Obecné informace, nejde o nabídku ani doporučení. Podmínky bank se liší, upřesním při hovoru.
+      </p>
+      <h1 class="text-2xl font-extrabold uppercase md:text-4xl">7 chyb, které prodražují hypotéku</h1>
+      <p class="mt-2 max-w-xl text-ui-muted">Průvodce pro každého, kdo plánuje hypotéku nebo mu končí fixace.</p>
+
+      <div class="mt-8 grid gap-10 lg:grid-cols-[420px_1fr] lg:items-start">
+
+        <!-- ===== Přehrávač ===== -->
+        <div class="pruvodce-prehravac-obal sticky top-20">
+          <div id="pruvodce-prehravac"></div>
+          <p class="mt-2 text-center text-xs text-ui-muted">Klepněte vpravo/vlevo pro navigaci. Přidržte pro pauzu.</p>
+        </div>
+
+        <!-- ===== Psaná verze ===== -->
+        <div>
+          <h2 class="text-xl font-extrabold uppercase mb-6">7 chyb — přehled</h2>
+          <div id="pruvodce-chyby" class="flex flex-col gap-6">
+            <!-- Generuje pruvodce.ts ze SCENAR dat -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Checklist ===== -->
+      <section id="checklist" class="mt-16 scroll-mt-20">
+        <h2 class="text-xl font-extrabold uppercase mb-2">Checklist dokumentů do banky</h2>
+        <p class="text-sm text-ui-muted mb-6">
+          Požadavky se liší podle banky a typu úvěru, přesný seznam vám upřesním při hovoru.
+        </p>
+
+        <!-- Záložky -->
+        <div class="flex gap-1 mb-6 border-b-2 border-black/10" role="tablist" aria-label="Záložky checklistu">
+          <button
+            type="button"
+            data-checklist-tab="zamestnanec"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-zamestnanec"
+            class="px-4 py-2 font-bold text-sm uppercase tracking-wide border-b-2 -mb-0.5 border-brand-primary text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+          >Zaměstnanec</button>
+          <button
+            type="button"
+            data-checklist-tab="osvc"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-osvc"
+            class="px-4 py-2 font-bold text-sm uppercase tracking-wide border-b-2 -mb-0.5 border-transparent text-ui-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+          >OSVČ</button>
+        </div>
+
+        <!-- Panel: Zaměstnanec -->
+        <div id="panel-zamestnanec" data-checklist-panel="zamestnanec" role="tabpanel" aria-label="Checklist pro zaměstnance">
+          <h3 class="text-sm font-bold uppercase tracking-wide text-ui-muted mb-3">Pro všechny</h3>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-op" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Občanský průkaz a druhý doklad totožnosti</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-smlouva" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Rezervační nebo kupní smlouva (nebo kupní cena a údaje o nemovitosti)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-lv" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Výpis z katastru nemovitostí (LV)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-zdroje" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Doklad o vlastních zdrojích (výpis ze spořicího účtu)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-zavazky" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Přehled stávajících závazků (úvěry, leasingy, kreditní karty, povolená přečerpání)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-pojisteni" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Doklad o pojištění nemovitosti <span class="text-ui-muted">(až před čerpáním)</span></span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-odhad" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Odhad nemovitosti <span class="text-ui-muted">(zajišťuje banka)</span></span></li>
+          </ul>
+          <h3 class="text-sm font-bold uppercase tracking-wide text-ui-muted mb-3">Zaměstnanec navíc</h3>
+          <ul class="flex flex-col gap-2">
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-prijem" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Potvrzení o příjmu / výplatní pásky za poslední měsíce</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-vypisy" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Výpisy z účtu za poslední měsíce</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="z-pp" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Pracovní smlouva <span class="text-ui-muted">(pokud ji banka vyžaduje)</span></span></li>
+          </ul>
+        </div>
+
+        <!-- Panel: OSVČ -->
+        <div id="panel-osvc" data-checklist-panel="osvc" role="tabpanel" aria-label="Checklist pro OSVČ" hidden>
+          <h3 class="text-sm font-bold uppercase tracking-wide text-ui-muted mb-3">Pro všechny</h3>
+          <ul class="flex flex-col gap-2 mb-6">
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-op" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Občanský průkaz a druhý doklad totožnosti</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-smlouva" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Rezervační nebo kupní smlouva (nebo kupní cena a údaje o nemovitosti)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-lv" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Výpis z katastru nemovitostí (LV)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-zdroje" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Doklad o vlastních zdrojích (výpis ze spořicího účtu)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-zavazky" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Přehled stávajících závazků (úvěry, leasingy, kreditní karty, povolená přečerpání)</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-pojisteni" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Doklad o pojištění nemovitosti <span class="text-ui-muted">(až před čerpáním)</span></span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-odhad" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Odhad nemovitosti <span class="text-ui-muted">(zajišťuje banka)</span></span></li>
+          </ul>
+          <h3 class="text-sm font-bold uppercase tracking-wide text-ui-muted mb-3">OSVČ navíc</h3>
+          <ul class="flex flex-col gap-2">
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-dp" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Daňové přiznání za poslední 1–2 roky s potvrzením o podání</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-bezdl" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Potvrzení o bezdlužnosti (FÚ, OSSZ, ZP) <span class="text-ui-muted">— pokud banka vyžaduje</span></span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-pausal" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">U paušální daně: doklady o zaplacených zálohách</span></li>
+            <li class="flex items-start gap-3"><input type="checkbox" data-checklist-item="o-podnik" class="mt-1 h-4 w-4 shrink-0 accent-brand-primary" /><span class="text-sm">Výpisy z podnikatelského účtu</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== Akce ===== -->
+      <div class="mt-10 flex flex-wrap gap-3">
+        <button
+          type="button"
+          id="btn-tisk"
+          class="inline-flex items-center gap-2 rounded-none border-2 border-brand-primary-dark px-5 py-3 text-sm font-bold uppercase tracking-wide text-brand-primary-dark hover:bg-brand-primary-dark hover:text-white transition"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6,9 6,2 18,2 18,9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Uložit jako PDF
+        </button>
+        <a
+          href="https://calendar.app.google/pX6djR7KPxPxVg9m8"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-rezervovat-print inline-flex items-center gap-2 rounded-none bg-brand-primary px-5 py-3 text-sm font-bold uppercase tracking-wide text-white hover:opacity-90"
+        >
+          Rezervovat termín hovoru
+        </a>
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 rounded-none border-2 border-black/20 px-5 py-3 text-sm font-bold uppercase tracking-wide text-ui-muted hover:border-brand-primary hover:text-brand-primary transition"
+        >
+          ← Zpět na kalkulačku
+        </a>
+      </div>
+    </main>
+
+    <!-- ===== PATIČKA ===== -->
+    <footer class="bg-brand-dark py-10 text-white/80 mt-12">
+      <div class="mx-auto max-w-screen-lg px-4 md:px-6">
+        <div class="grid gap-8 md:grid-cols-3">
+          <div>
+            <p class="text-lg font-bold uppercase text-white">Jan Frýdl</p>
+            <p class="text-sm">Správce majetku</p>
+            <ul class="mt-3 flex flex-col gap-1 text-sm">
+              <li><a href="mailto:jan.frydl@4fin.cz" class="underline">jan.frydl@4fin.cz</a></li>
+              <li><a href="tel:+420731444770" class="underline">+420 731 444 770</a></li>
+            </ul>
+          </div>
+          <div class="text-sm md:col-span-2">
+            <p>Jan Frýdl, IČO 19342896, se sídlem Elišky Krásnohorské 712/15, 323 00 Plzeň.</p>
+            <p class="mt-2">Jan Frýdl je vázaným zástupcem společnosti 4fin Better together, a.s., IČO 06018521, se sídlem Na hřebenech II 1718/10, 140 00 Praha 4.</p>
+            <p class="mt-2">Zapsán v seznamu vázaných zástupců podle zákona o spotřebitelském úvěru vedeném Českou národní bankou pod IČO 19342896.</p>
+            <p class="mt-3">Zprostředkování spotřebitelského úvěru na bydlení podle zákona č. 257/2016 Sb.</p>
+            <p class="mt-3 flex gap-4">
+              <a href="/gdpr" class="underline">Ochrana osobních údajů</a>
+              <a href="/cookies" class="underline">Cookies</a>
+            </p>
+          </div>
+        </div>
+        <p class="mt-8 text-xs text-white/50">© 2026 Jan Frýdl. Všechna práva vyhrazena.</p>
+      </div>
+    </footer>
+
+    <!-- Cookie lišta -->
+    <div
+      id="cookie-lista"
+      class="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-brand-light p-4 shadow-card md:inset-x-auto md:top-auto md:bottom-4 md:left-4 md:right-auto md:max-w-md md:rounded-sm md:border"
+      role="dialog"
+      aria-label="Nastavení cookies"
+    >
+      <p class="text-sm">Používáme cookies pro nezbytný chod webu. Víc v <a href="/cookies" class="underline">zásadách cookies</a>.</p>
+      <div id="cookie-nastaveni" hidden class="mt-3 flex flex-col gap-2 text-sm">
+        <label class="flex items-center gap-2"><input type="checkbox" id="cookie-analytika" class="accent-brand-primary" /> Analytika</label>
+        <label class="flex items-center gap-2"><input type="checkbox" id="cookie-marketing" class="accent-brand-primary" /> Marketing</label>
+        <button type="button" id="cookie-ulozit-nastaveni" class="mt-1 rounded-none bg-brand-primary py-2 text-sm font-bold uppercase text-white">Uložit</button>
+        <button type="button" id="cookie-jen-nezbytne" class="rounded-none border-2 border-brand-primary py-2 text-sm font-bold uppercase">Jen nezbytné</button>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <button type="button" id="cookie-nastavit" class="rounded-none border-2 border-brand-primary px-3 py-2 text-xs font-bold uppercase">Nastavit</button>
+        <button type="button" id="cookie-prijmout-vse" class="rounded-none bg-brand-primary px-3 py-2 text-xs font-bold uppercase text-white">Přijmout vše</button>
+      </div>
+    </div>
+
+    <!-- Styly pro psanou verzi (generovanou TS) -->
+    <style>
+      .pruvodce-chyba {
+        display: flex;
+        gap: 16px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+      }
+      .pruvodce-chyba:last-child { border-bottom: none; }
+      .pruvodce-chyba-cislo {
+        font-size: 36px;
+        font-weight: 900;
+        color: #b11f53;
+        line-height: 1;
+        min-width: 40px;
+        padding-top: 2px;
+      }
+      .pruvodce-chyba-nadpis {
+        font-size: 15px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        margin: 0 0 6px;
+      }
+      .pruvodce-chyba-vo {
+        font-size: 13px;
+        line-height: 1.65;
+        color: #5a5257;
+        margin: 0;
+      }
+
+      /* Styly záložek checklistu */
+      [data-checklist-tab][aria-selected="true"] {
+        border-color: #b11f53;
+        color: #b11f53;
+      }
+      [data-checklist-tab][aria-selected="false"] {
+        border-color: transparent;
+        color: #5a5257;
+      }
+    </style>
+  </body>
+</html>

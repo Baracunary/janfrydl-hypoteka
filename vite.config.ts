@@ -46,6 +46,7 @@ export default defineConfig({
         cookies: resolve(__dirname, 'cookies.html'),
         fixace: resolve(__dirname, 'fixace.html'),
         'fixace-video': resolve(__dirname, 'fixace/video.html'),
+        pruvodce: resolve(__dirname, 'pruvodce.html'),
       },
     },
   },

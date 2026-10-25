@@ -34,10 +34,26 @@ export function normalizujTelefon(telefon: string): string | null {
   return `+420${bezPredvolby}`
 }
 
+const FALESNA_CISLA = new Set([
+  '123456789',
+  '987654321',
+])
+
+function jeZjevneFalesne(devitMistne: string): boolean {
+  if (FALESNA_CISLA.has(devitMistne)) return true
+  // všechny číslice stejné: 777777777, 666666666 atd.
+  if (/^(\d)\1{8}$/.test(devitMistne)) return true
+  return false
+}
+
 export function validujTelefon(telefon: string): VysledekValidace {
   const normalizovany = normalizujTelefon(telefon)
   if (!normalizovany) {
     return { platne: false, chyba: 'Zadejte platné české mobilní číslo, např. 731 444 770.' }
+  }
+  const devitMistne = normalizovany.slice(4) // strip +420
+  if (jeZjevneFalesne(devitMistne)) {
+    return { platne: false, chyba: 'Zadejte prosím své skutečné telefonní číslo.' }
   }
   return { platne: true, navrh: normalizovany }
 }

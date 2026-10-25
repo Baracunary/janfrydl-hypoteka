@@ -43,7 +43,7 @@ function uverPasmo(uver: number): string {
 }
 
 function sestavPayload(
-  udaje: { jmeno: string; telefon: string; email: string; situace: string; souhlasCas: string },
+  udaje: { jmeno: string; telefon: string; email: string; situace: string; zdroj: string; souhlasCas: string },
   eventId: string,
   stav: KalkulackaStav,
 ) {
@@ -53,6 +53,7 @@ function sestavPayload(
     telefon: udaje.telefon,
     email: udaje.email,
     situace: udaje.situace,
+    zdroj: udaje.zdroj,
     souhlas: true,
     souhlas_cas: udaje.souhlasCas,
     event_id: eventId,
@@ -94,10 +95,9 @@ export interface VolbyFormulare {
 export function inicializujFormular(form: HTMLFormElement, volby: VolbyFormulare): void {
   const vstupJmeno = polePovinne<HTMLInputElement>(form, 'jmeno')
   const vstupTelefon = polePovinne<HTMLInputElement>(form, 'telefon')
-  // Email je volitelný — pole nemusí být přítomno, nebo může být s required=false
   const vstupEmail = pole<HTMLInputElement>(form, 'email')
-  // Situace může být hidden input s pevnou hodnotou nebo select — obojí funguje
   const vstupSituace = pole<HTMLInputElement | HTMLSelectElement>(form, 'situace')
+  const vstupZdroj = pole<HTMLInputElement>(form, 'zdroj')
   const vstupSouhlas = polePovinne<HTMLInputElement>(form, 'souhlas')
   const vstupHoneypot = polePovinne<HTMLInputElement>(form, 'honeypot')
   const tlacitkoOdeslat = form.querySelector<HTMLButtonElement>('[data-role="btn-odeslat"]')
@@ -188,6 +188,7 @@ export function inicializujFormular(form: HTMLFormElement, volby: VolbyFormulare
         telefon: normalizujTelefon(vstupTelefon.value)!,
         email: vstupEmail?.value.trim() ?? '',
         situace: situaceHodnota,
+        zdroj: vstupZdroj?.value ?? '',
         souhlasCas: new Date().toISOString(),
       },
       eventId,

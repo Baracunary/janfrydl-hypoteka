@@ -79,12 +79,18 @@ async function posliEmail(lead: LeadPayload): Promise<boolean> {
   }
 
   const k = lead.kalkulacka
+  const zdrojLabel: Record<string, string> = {
+    poptavka_hypoteky: '🏠 Poptávka hypotéky',
+    prirucka_7_chyb: '📖 Příručka 7 chyb',
+  }
   const typLabel = lead.typ === 'fixace' ? '🔄 Fixace' : lead.typ === 'koupe' ? '🏠 Koupě' : ''
+  const zdrojText = (lead as any).zdroj ? (zdrojLabel[(lead as any).zdroj] ?? (lead as any).zdroj) : ''
   const html = `
-    <h2>Nová poptávka z kalkulačky${typLabel ? ` — ${typLabel}` : ''}</h2>
+    <h2>Nový kontakt${zdrojText ? ` — ${zdrojText}` : typLabel ? ` — ${typLabel}` : ''}</h2>
     <p><strong>${lead.jmeno}</strong><br/>
     Tel: <a href="tel:${lead.telefon}">${lead.telefon}</a><br/>
     E-mail: <a href="mailto:${lead.email}">${lead.email}</a><br/>
+    ${zdrojText ? `Zdroj: <strong>${zdrojText}</strong><br/>` : ''}
     ${lead.situace ? `Řeší: ${lead.situace}` : ''}
     ${lead.kdy_konci_fixace ? `<br/>Kdy končí fixace: ${lead.kdy_konci_fixace}` : ''}
     ${lead.faze ? `<br/>Fáze koupě: ${lead.faze}` : ''}
@@ -121,7 +127,7 @@ async function posliEmail(lead: LeadPayload): Promise<boolean> {
         from: od,
         to: [komu],
         reply_to: lead.email,
-        subject: `Nová poptávka: ${lead.jmeno} — ${lead.situace}`,
+        subject: `Nový kontakt: ${lead.jmeno}${zdrojText ? ` (${zdrojText})` : lead.situace ? ` — ${lead.situace}` : ''}`,
         html,
       }),
     })

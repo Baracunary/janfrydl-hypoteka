@@ -333,15 +333,15 @@
               <!-- CTA příručky — zobrazí se po prvním výpočtu -->
               <a
                 id="prirucka-teaser"
-                href="#krok-2"
+                href="#forma-prirucka"
                 class="mt-4 flex items-center gap-3 rounded-sm bg-brand-primary-dark px-4 py-3 text-white no-underline hover:opacity-90 transition"
-                aria-label="Otevřít příručku: 7 chyb, které prodražují hypotéku"
+                aria-label="Získat příručku: 7 chyb, které prodražují hypotéku"
               >
                 <div class="shrink-0 flex h-12 w-12 items-center justify-center rounded bg-brand-primary text-white text-2xl font-black leading-none" aria-hidden="true">7</div>
                 <div class="min-w-0 flex-1">
                   <p class="text-xs font-bold uppercase tracking-wide text-white/70">Zdarma pro vás</p>
                   <p class="text-sm font-extrabold leading-tight">7 chyb, které prodražují hypotéku</p>
-                  <p class="mt-0.5 text-xs text-white/70">Animace 70 s + checklist dokumentů do banky</p>
+                  <p class="mt-0.5 text-xs text-white/70">Průvodce + checklist dokumentů do banky</p>
                 </div>
                 <span class="shrink-0 text-xl font-bold text-brand-primary" aria-hidden="true">→</span>
               </a>
@@ -453,8 +453,9 @@
                     <button type="button" data-role="oprava-emailu" hidden class="mt-1 text-sm font-bold text-brand-primary underline"></button>
                   </div>
 
-                  <!-- Situace — hidden, pevná hodnota -->
+                  <!-- Situace + zdroj — hidden, pevné hodnoty -->
                   <input type="hidden" name="situace" data-pole="situace" value="Kupuji nemovitost" />
+                  <input type="hidden" name="zdroj" data-pole="zdroj" value="poptavka_hypoteky" />
 
                   <!-- Honeypot -->
                   <div class="pole-pro-boty" aria-hidden="true">
@@ -764,15 +765,18 @@
         </div>
       </section>
 
-      <!-- ======================= ZÁVĚREČNÝ FORMULÁŘ ======================= -->
-      <section class="py-14 md:py-20">
+      <!-- ======================= PŘÍRUČKA — FORMULÁŘ ======================= -->
+      <section id="forma-prirucka" class="scroll-mt-16 bg-brand-primary-tint py-14 md:py-20">
         <div class="mx-auto max-w-2xl px-4 md:px-6">
-          <h2 class="text-center text-2xl font-extrabold uppercase md:text-3xl">Chci srovnání bank zdarma</h2>
-          <p class="mt-3 text-center text-ui-muted">
-            Nechte mi na sebe kontakt a do 24 hodin vám připravím osobní srovnání nabídek, zdarma a nezávazně.
+          <p class="mb-2 inline-block bg-brand-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">Zdarma</p>
+          <h2 class="text-2xl font-extrabold uppercase md:text-3xl">7 chyb, které prodražují hypotéku</h2>
+          <p class="mt-3 text-ui-muted">
+            Připravil jsem video, kde projdu nejčastější chyby, na kterých lidé zbytečně přeplácejí. Přidám vám i checklist dokumentů, které budete potřebovat do banky.
           </p>
-          <div id="form2-obal" class="mt-8">
-            <form id="form-zaverecny" novalidate class="scroll-mt-20 rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
+          <p class="mt-2 font-bold">Nechte mi číslo a pošlu vám odkaz.</p>
+
+          <div id="form2-obal" class="mt-6">
+            <form id="form-zaverecny" novalidate class="rounded-sm bg-brand-light p-5 shadow-card ring-1 ring-black/5 md:p-6">
               <div class="grid gap-4">
                 <div>
                   <label for="f2-jmeno" class="mb-1 block text-sm font-bold">Jméno a příjmení</label>
@@ -786,15 +790,16 @@
                 </div>
                 <div>
                   <label for="f2-email" class="mb-1 block text-sm font-bold">
-                    E-mail <span class="font-normal text-ui-muted">(volitelné, pošlu vám srovnání)</span>
+                    E-mail <span class="font-normal text-ui-muted">(volitelné)</span>
                   </label>
                   <input type="email" id="f2-email" name="email" data-pole="email" autocomplete="email" placeholder="jana@email.cz" class="w-full rounded-sm border border-black/10 px-3 py-2.5 text-base focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/30" aria-describedby="f2-err-email" />
                   <p id="f2-err-email" data-chyba="email" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
                   <button type="button" data-role="oprava-emailu" hidden class="mt-1 text-sm font-bold text-brand-primary underline"></button>
                 </div>
 
-                <!-- Situace — hidden, pevná hodnota -->
-                <input type="hidden" name="situace" data-pole="situace" value="Kupuji nemovitost" />
+                <!-- Zdroj + situace — identifikuje kontakt v tabulce -->
+                <input type="hidden" name="situace" data-pole="situace" value="Příručka 7 chyb" />
+                <input type="hidden" name="zdroj" data-pole="zdroj" value="prirucka_7_chyb" />
 
                 <div class="pole-pro-boty" aria-hidden="true">
                   <label for="f2-web">Vaše webová stránka</label>
@@ -804,7 +809,7 @@
                 <div>
                   <label class="flex items-start gap-2 text-sm">
                     <input type="checkbox" id="f2-souhlas" name="souhlas" data-pole="souhlas" required class="mt-1 accent-brand-primary" aria-describedby="f2-err-souhlas" />
-                    <span>Souhlasím se <a href="/gdpr" class="underline">zpracováním osobních údajů</a> za účelem přípravy nabídky.</span>
+                    <span>Souhlasím se <a href="/gdpr" class="underline">zpracováním osobních údajů</a> za účelem zaslání materiálů.</span>
                   </label>
                   <p id="f2-err-souhlas" data-chyba="souhlas" class="mt-1 text-sm text-ui-warning-text" role="alert"></p>
                 </div>
@@ -812,25 +817,16 @@
                 <p data-role="chyba-obecna" hidden role="alert" class="rounded-sm bg-ui-warning-tint p-3 text-sm text-ui-warning-text"></p>
 
                 <button type="submit" data-role="btn-odeslat" class="w-full rounded-none bg-brand-primary py-4 text-base font-bold uppercase tracking-wide text-white transition hover:opacity-90 focus-visible:opacity-90">
-                  Chci porovnat banky zdarma
+                  Chci příručku zdarma
                 </button>
-                <p class="text-center text-xs text-ui-muted">Zavolám vám do 24 hodin. Žádný spam, ozvu se jen k vašemu výpočtu.</p>
+                <p class="text-center text-xs text-ui-muted">Pošlu vám odkaz co nejdříve. Žádný spam.</p>
               </div>
             </form>
 
             <div id="form2-diky" hidden class="rounded-sm bg-brand-light p-5 text-center shadow-card ring-1 ring-black/5 md:p-6">
               <span class="text-3xl" aria-hidden="true">✓</span>
               <h3 class="mt-2 text-xl font-extrabold uppercase text-ui-success">Hotovo, děkuji.</h3>
-              <p class="mt-2">Ozvu se vám na uvedené číslo do 24 hodin.</p>
-              <a href="/pruvodce" class="mt-5 flex w-full items-center justify-center gap-2 rounded-none bg-brand-primary py-4 text-base font-bold uppercase tracking-wide text-white hover:opacity-90">
-                <span class="text-xl" aria-hidden="true">▶</span>
-                Spustit příručku: 7 chyb, které prodražují hypotéku
-              </a>
-              <div class="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
-                <a href="https://calendar.app.google/pX6djR7KPxPxVg9m8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-none border-2 border-brand-primary px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-brand-primary hover:bg-brand-primary hover:text-white transition">
-                  Rezervovat termín hovoru
-                </a>
-              </div>
+              <p class="mt-2">Pošlu vám odkaz co nejdříve.</p>
             </div>
           </div>
         </div>
